@@ -3,14 +3,12 @@ import { AlertCircle, ChevronLeft, ExternalLink } from "lucide-react";
 import { CITATIONS } from "../data/citations";
 import { AMBER, GREY, INK, TINT, ULTRA_VIOLET, VIOLET, TEAL, FONT_MONO, FONT_SERIF } from "../theme";
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-};
-
-const item = {
+// With 100+ entries, a single mount-time stagger across the whole list would
+// take several seconds to finish revealing the tail. Instead each entry
+// reveals itself as it scrolls into view (once), which scales to any length.
+const itemVariants = {
   hidden: { opacity: 0, x: -12 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  show: { opacity: 1, x: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
 export default function LiteraturePage({ onBack }) {
@@ -49,10 +47,17 @@ export default function LiteraturePage({ onBack }) {
         many fracture types beyond hip). Send me a paper you want added and I'll fold it in.
       </p>
 
-      <motion.div variants={container} initial="hidden" animate="show" style={{ position: "relative", paddingLeft: 26 }}>
+      <div style={{ position: "relative", paddingLeft: 26 }}>
         <div style={{ position: "absolute", left: 5, top: 6, bottom: 6, width: 2, background: TINT }} />
         {sorted.map(([id, c]) => (
-          <motion.div key={id} variants={item} style={{ position: "relative", marginBottom: 26 }}>
+          <motion.div
+            key={id}
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-40px" }}
+            style={{ position: "relative", marginBottom: 26 }}
+          >
             <div style={{ position: "absolute", left: -26, top: 4, width: 12, height: 12, borderRadius: "50%", background: dotColor(c.type), border: "2px solid #fff", boxShadow: `0 0 0 2px ${dotColor(c.type)}` }} />
             <div style={{ fontSize: 13, fontFamily: FONT_MONO, color: dotColor(c.type), fontWeight: 700, marginBottom: 4 }}>{c.year}</div>
             <motion.div
@@ -63,7 +68,9 @@ export default function LiteraturePage({ onBack }) {
               <div style={{ fontSize: 12.5, color: GREY, marginBottom: 8 }}>
                 {c.authors} · {c.journal}
               </div>
-              <p style={{ fontSize: 13.5, color: INK, lineHeight: 1.5, margin: "0 0 8px 0" }}>{c.note}</p>
+              {c.note && (
+                <p style={{ fontSize: 13.5, color: INK, lineHeight: 1.5, margin: "0 0 8px 0" }}>{c.note}</p>
+              )}
               {c.doi && (
                 <a href={`https://doi.org/${c.doi}`} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: ULTRA_VIOLET, display: "inline-flex", alignItems: "center", gap: 3, textDecoration: "none" }}>
                   doi.org/{c.doi} <ExternalLink size={11} />
@@ -82,7 +89,7 @@ export default function LiteraturePage({ onBack }) {
             </motion.div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
