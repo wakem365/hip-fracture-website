@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { PHASES } from "../data/steps";
@@ -110,6 +111,18 @@ function HeroPanel({ phase, onSelect }) {
 }
 
 export default function Home({ onSelectPhase, onLiterature, skipHero = false }) {
+  const stageRef = useRef(null);
+
+  // Returning from a phase/literature page should land on the category
+  // picker, not a replay of the landing hero — but the hero still exists
+  // above it, reachable by scrolling up. So jump scroll position past it
+  // (before paint, to avoid a visible flash) rather than unmounting it.
+  useLayoutEffect(() => {
+    if (skipHero && stageRef.current) {
+      stageRef.current.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }, [skipHero]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -131,9 +144,9 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
         }
       `}</style>
 
-      {!skipHero && <LandingHero />}
+      <LandingHero />
 
-      <div className="stage-section">
+      <div className="stage-section" ref={stageRef}>
         <motion.div
           className="hero-grid"
           initial={{ opacity: 0, y: 60 }}

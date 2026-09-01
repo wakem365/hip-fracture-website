@@ -34,11 +34,42 @@ function fieldLabel(children) {
   );
 }
 
+// Shared 0-10 button row, reused for the before/after/helped scale questions.
+function ScalePicker({ value, onChange }) {
+  return (
+    <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+      {Array.from({ length: 11 }, (_, n) => n).map((n) => (
+        <button
+          key={n}
+          onClick={() => onChange(n)}
+          style={{
+            width: 30,
+            height: 30,
+            borderRadius: 7,
+            border: `1.5px solid ${value === n ? VIOLET : TINT}`,
+            background: value === n ? VIOLET : "#fff",
+            color: value === n ? "#fff" : INK,
+            fontSize: 12.5,
+            fontFamily: FONT_MONO,
+            fontWeight: 600,
+            cursor: "pointer",
+            transition: "all 0.15s ease",
+          }}
+        >
+          {n}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function SurveyWidget() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState("form"); // "form" | "thanks"
-  const [helped, setHelped] = useState(null); // "yes" | "no"
-  const [scale, setScale] = useState(null); // 0-10
+  const [helped, setHelped] = useState(null); // "Yes" | "No"
+  const [scale, setScale] = useState(null); // 0-10, how much it helped
+  const [before, setBefore] = useState(null); // 0-10, understanding before
+  const [after, setAfter] = useState(null); // 0-10, understanding after
   const [role, setRole] = useState(null);
 
   useEffect(() => {
@@ -70,15 +101,17 @@ export default function SurveyWidget() {
       setStep("form");
       setHelped(null);
       setScale(null);
+      setBefore(null);
+      setAfter(null);
       setRole(null);
     }, 300);
   };
 
-  const canSubmit = helped !== null && scale !== null && role !== null;
+  const canSubmit = helped !== null && scale !== null && before !== null && after !== null && role !== null;
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    submitSurvey({ helped, scale, role });
+    submitSurvey({ helped, scale, before, after, role });
     setStep("thanks");
     setTimeout(() => close(true), 1800);
   };
@@ -210,29 +243,17 @@ export default function SurveyWidget() {
 
                     <div style={{ marginBottom: 20 }}>
                       {fieldLabel("On a scale of 0–10, how much did it help?")}
-                      <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-                        {Array.from({ length: 11 }, (_, n) => n).map((n) => (
-                          <button
-                            key={n}
-                            onClick={() => setScale(n)}
-                            style={{
-                              width: 30,
-                              height: 30,
-                              borderRadius: 7,
-                              border: `1.5px solid ${scale === n ? VIOLET : TINT}`,
-                              background: scale === n ? VIOLET : "#fff",
-                              color: scale === n ? "#fff" : INK,
-                              fontSize: 12.5,
-                              fontFamily: FONT_MONO,
-                              fontWeight: 600,
-                              cursor: "pointer",
-                              transition: "all 0.15s ease",
-                            }}
-                          >
-                            {n}
-                          </button>
-                        ))}
-                      </div>
+                      <ScalePicker value={scale} onChange={setScale} />
+                    </div>
+
+                    <div style={{ marginBottom: 20 }}>
+                      {fieldLabel("How much did you understand hip fractures before using this?")}
+                      <ScalePicker value={before} onChange={setBefore} />
+                    </div>
+
+                    <div style={{ marginBottom: 20 }}>
+                      {fieldLabel("How much did you understand hip fractures after using this?")}
+                      <ScalePicker value={after} onChange={setAfter} />
                     </div>
 
                     <div style={{ marginBottom: 24 }}>
