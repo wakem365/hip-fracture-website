@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import buildingImg from "../assets/landing/nyu-loh-building.png";
+import buildingImg from "../assets/landing/nyu-loh-banners.webp";
 import logoImg from "../assets/brand/nyu-langone-orthopedics-logo.png";
 import { FONT_MONO, FONT_SERIF } from "../theme";
 
@@ -89,13 +89,13 @@ export default function LandingHero() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           style={{
             background: "#fff",
-            borderRadius: 12,
-            padding: "10px 22px",
+            borderRadius: 14,
+            padding: "12px 16px",
             boxShadow: "0 8px 28px rgba(0,0,0,0.35)",
             marginBottom: 30,
           }}
         >
-          <img src={logoImg} alt="NYU Langone Orthopedics" style={{ display: "block", height: 40, width: "auto" }} />
+          <img src={logoImg} alt="NYU Langone Orthopedics" style={{ display: "block", height: 68, width: "auto" }} />
         </motion.div>
 
         <motion.div
