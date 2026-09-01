@@ -2,17 +2,121 @@ import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { PHASES } from "../data/steps";
 import { CITATIONS } from "../data/citations";
-import { GREY, INK, TINT, ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
+import preOpImg from "../assets/hero/pre-op.webp";
+import intraOpImg from "../assets/hero/intra-op.png";
+import postOpImg from "../assets/hero/post-op.webp";
+import { GREY, INK, ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
-const container = {
+const HERO_IMAGES = {
+  pre: preOpImg,
+  intra: intraOpImg,
+  post: postOpImg,
+};
+
+const header = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 18 },
+const headerItem = {
+  hidden: { opacity: 0, y: 14 },
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
+
+// Each panel's image/overlay/caption reads its "rest" vs "hover" look from
+// this shared variant map, driven by the parent button's whileHover — no
+// per-child hover state needed.
+const imgVariants = {
+  rest: { scale: 1, filter: "grayscale(45%) brightness(0.72)" },
+  hover: { scale: 1.06, filter: "grayscale(0%) brightness(1)" },
+};
+const overlayVariants = {
+  rest: { opacity: 1 },
+  hover: { opacity: 0 },
+};
+const cueVariants = {
+  rest: { opacity: 0, y: 6 },
+  hover: { opacity: 1, y: 0 },
+};
+
+function HeroPanel({ phase, onSelect }) {
+  const Icon = phase.icon;
+  return (
+    <motion.button
+      onClick={() => onSelect(phase.id)}
+      initial="rest"
+      whileHover="hover"
+      whileTap={{ scale: 0.99 }}
+      animate="rest"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        border: "none",
+        padding: 0,
+        margin: 0,
+        display: "block",
+        width: "100%",
+        height: "100%",
+        cursor: "pointer",
+        background: "#000",
+        textAlign: "left",
+      }}
+    >
+      <motion.img
+        src={HERO_IMAGES[phase.id]}
+        alt=""
+        variants={imgVariants}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+      <motion.div
+        variants={overlayVariants}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(180deg, rgba(15,10,20,0.25) 0%, rgba(15,10,20,0.6) 100%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          top: 22,
+          left: 22,
+          width: 40,
+          height: 40,
+          borderRadius: 10,
+          background: "rgba(255,255,255,0.16)",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(255,255,255,0.3)",
+          color: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Icon size={19} />
+      </div>
+
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "0 26px 30px", color: "#fff" }}>
+        <div style={{ fontFamily: FONT_MONO, fontSize: 11.5, letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.85 }}>
+          {phase.blurb}
+        </div>
+        <div style={{ fontFamily: FONT_SERIF, fontSize: 28, fontWeight: 600, marginTop: 6, lineHeight: 1.1, textWrap: "balance" }}>
+          {phase.label}
+        </div>
+        <motion.div
+          variants={cueVariants}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, marginTop: 12 }}
+        >
+          View timeline <ArrowRight size={14} />
+        </motion.div>
+      </div>
+    </motion.button>
+  );
+}
 
 export default function Home({ onSelectPhase, onLiterature }) {
   return (
@@ -21,103 +125,78 @@ export default function Home({ onSelectPhase, onLiterature }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      style={{ maxWidth: 920, margin: "0 auto", padding: "56px 24px" }}
     >
-      <motion.div
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35 }}
-        style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.14em", color: VIOLET, textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}
-      >
-        NYU Orthopedic Trauma · Patient Care Pathway
-      </motion.div>
-      <motion.h1
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.05 }}
-        style={{ fontFamily: FONT_SERIF, fontSize: 44, fontWeight: 600, margin: 0, color: INK, letterSpacing: "-0.01em", lineHeight: 1.1 }}
-      >
-        Hip Fracture, Step by Step
-      </motion.h1>
-      <motion.p
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.12 }}
-        style={{ color: GREY, fontSize: 16, marginTop: 14, maxWidth: 560, lineHeight: 1.55 }}
-      >
-        What happens, when it happens, and why — for patients, families, and the team taking
-        care of you. Choose a stage of care to see the timeline.
-      </motion.p>
+      <style>{`
+        .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); height: 64vh; min-height: 420px; }
+        @media (max-width: 820px) {
+          .hero-grid { grid-template-columns: 1fr; height: auto; }
+          .hero-grid > * { height: 46vh; min-height: 320px; }
+        }
+      `}</style>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18, marginTop: 44 }}
-      >
-        {PHASES.map((p) => {
-          const Icon = p.icon;
-          return (
-            <motion.button
-              key={p.id}
-              variants={item}
-              onClick={() => onSelectPhase(p.id)}
-              whileHover={{ y: -4, borderColor: VIOLET }}
-              whileTap={{ scale: 0.98 }}
-              style={{
-                textAlign: "left",
-                border: `1px solid ${TINT}`,
-                borderRadius: 16,
-                background: "#fff",
-                padding: "28px 22px",
-                cursor: "pointer",
-                position: "relative",
-                overflow: "hidden",
-                minHeight: 190,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})` }} />
-              <div>
-                <div style={{ width: 42, height: 42, borderRadius: 10, background: TINT, color: VIOLET, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-                  <Icon size={20} />
-                </div>
-                <div style={{ fontFamily: FONT_SERIF, fontSize: 21, color: INK, fontWeight: 600 }}>{p.label}</div>
-                <div style={{ fontSize: 12, fontFamily: FONT_MONO, color: VIOLET, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>
-                  {p.blurb}
-                </div>
-                <p style={{ fontSize: 13.5, color: GREY, marginTop: 10, lineHeight: 1.5 }}>{p.desc}</p>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: VIOLET, marginTop: 16 }}>
-                View timeline <ArrowRight size={14} />
-              </div>
-            </motion.button>
-          );
-        })}
+      <motion.div variants={header} initial="hidden" animate="show" style={{ maxWidth: 920, margin: "0 auto", padding: "48px 24px 36px" }}>
+        <motion.div
+          variants={headerItem}
+          style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.14em", color: VIOLET, textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}
+        >
+          NYU Orthopedic Trauma · Patient Care Pathway
+        </motion.div>
+        <motion.h1
+          variants={headerItem}
+          style={{ fontFamily: FONT_SERIF, fontSize: 44, fontWeight: 600, margin: 0, color: INK, letterSpacing: "-0.01em", lineHeight: 1.1, textWrap: "balance" }}
+        >
+          Hip Fracture, Step by Step
+        </motion.h1>
+        <motion.p variants={headerItem} style={{ color: GREY, fontSize: 16, marginTop: 14, maxWidth: 560, lineHeight: 1.55 }}>
+          What happens, when it happens, and why — for patients, families, and the team taking
+          care of you. Choose a stage of care to see the timeline.
+        </motion.p>
       </motion.div>
+
+      <div className="hero-grid">
+        {PHASES.map((p) => (
+          <HeroPanel key={p.id} phase={p} onSelect={onSelectPhase} />
+        ))}
+      </div>
 
       <motion.button
-        variants={item}
-        initial="hidden"
-        animate="show"
-        transition={{ delay: 0.3 }}
         onClick={onLiterature}
-        whileHover={{ borderColor: VIOLET }}
-        whileTap={{ scale: 0.99 }}
-        style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 18, padding: "16px 20px", width: "100%", border: `1px dashed ${TINT}`, borderRadius: 14, background: "#fff", cursor: "pointer", textAlign: "left" }}
+        whileHover={{ filter: "brightness(1.08)" }}
+        whileTap={{ scale: 0.995 }}
+        style={{
+          display: "block",
+          width: "100%",
+          border: "none",
+          padding: "26px 24px",
+          background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})`,
+          cursor: "pointer",
+          textAlign: "left",
+        }}
       >
-        <div style={{ width: 36, height: 36, borderRadius: 9, background: TINT, color: VIOLET, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <BookOpen size={17} />
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 14.5, fontWeight: 600, color: INK }}>The Literature, Over Time</div>
-          <div style={{ fontSize: 12.5, color: GREY, marginTop: 2 }}>
-            {Object.keys(CITATIONS).length} citations, 2002–2026 — how NYU's hip fracture research has evolved.
+        <div style={{ display: "flex", alignItems: "center", gap: 14, maxWidth: 920, margin: "0 auto" }}>
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 10,
+              background: "rgba(255,255,255,0.18)",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <BookOpen size={19} />
           </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15.5, fontWeight: 600, color: "#fff", fontFamily: FONT_SERIF }}>The Literature, Over Time</div>
+            <div style={{ fontSize: 12.5, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>
+              {Object.keys(CITATIONS).length} citations, 2002–2026 — how NYU's hip fracture research has evolved.
+            </div>
+          </div>
+          <ArrowRight size={18} color="#fff" />
         </div>
-        <ArrowRight size={16} color={VIOLET} />
       </motion.button>
     </motion.div>
   );
