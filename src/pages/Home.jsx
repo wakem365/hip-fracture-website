@@ -5,22 +5,13 @@ import { CITATIONS } from "../data/citations";
 import preOpImg from "../assets/hero/pre-op.webp";
 import intraOpImg from "../assets/hero/intra-op.png";
 import postOpImg from "../assets/hero/post-op.webp";
-import { GREY, INK, ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
+import LandingHero from "../components/LandingHero";
+import { ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
 const HERO_IMAGES = {
   pre: preOpImg,
   intra: intraOpImg,
   post: postOpImg,
-};
-
-const header = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-
-const headerItem = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
 // Each panel's image/overlay/caption reads its "rest" vs "hover" look from
@@ -134,30 +125,19 @@ export default function Home({ onSelectPhase, onLiterature }) {
         }
       `}</style>
 
-      <motion.div variants={header} initial="hidden" animate="show" style={{ maxWidth: 920, margin: "0 auto", padding: "48px 24px 36px" }}>
-        <motion.div
-          variants={headerItem}
-          style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.14em", color: VIOLET, textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}
-        >
-          NYU Orthopedic Trauma · Patient Care Pathway
-        </motion.div>
-        <motion.h1
-          variants={headerItem}
-          style={{ fontFamily: FONT_SERIF, fontSize: 44, fontWeight: 600, margin: 0, color: INK, letterSpacing: "-0.01em", lineHeight: 1.1, textWrap: "balance" }}
-        >
-          Hip Fracture, Step by Step
-        </motion.h1>
-        <motion.p variants={headerItem} style={{ color: GREY, fontSize: 16, marginTop: 14, maxWidth: 560, lineHeight: 1.55 }}>
-          What happens, when it happens, and why — for patients, families, and the team taking
-          care of you. Choose a stage of care to see the timeline.
-        </motion.p>
-      </motion.div>
+      <LandingHero />
 
-      <div className="hero-grid">
+      <motion.div
+        className="hero-grid"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {PHASES.map((p) => (
           <HeroPanel key={p.id} phase={p} onSelect={onSelectPhase} />
         ))}
-      </div>
+      </motion.div>
 
       <motion.button
         onClick={onLiterature}
