@@ -35,8 +35,9 @@ src/
     citations.js          CITATIONS registry (authors, journal, DOI/PMID, type)
     steps.js               PHASES + STEPS (the timeline content)
   components/
-    FemurSchematic.jsx     placeholder fracture-line diagram — swap point for
-                            real radiographs (see below)
+    FemurSchematic.jsx     renders the de-identified radiograph for a
+                            fracture type — swap point for new images (see
+                            below)
     CiteChip.jsx            single citation card
     EvidenceDropdown.jsx    collapsible "Evidence" section on a step
     TimelineRow.jsx          the numbered dot timeline (major + sub steps)
@@ -56,18 +57,19 @@ No component changes needed. A step without a confirmed citation should set
 `evidence: "..."` instead of `citations`, which renders as an explicit
 "not yet identified" flag rather than a guess.
 
-### Swapping in real radiographs
+### Swapping in different radiographs
 
-`FemurSchematic.jsx` currently draws a hand-drawn SVG outline with a fracture
-line for each `diagram` key (`fnf`, `basicervical`, `it`, `subtroch`). Once
-de-identified, institutionally-approved radiographs are available, swap the
-render inside that one component (e.g. an `<img>` keyed by `type`) — nothing
-else needs to change, since every caller only passes a `type` string.
+`FemurSchematic.jsx` maps each `diagram` key (`fnf`, `basicervical`, `it`,
+`subtroch`) to an image in `src/assets/radiographs/`. To replace one, drop a
+new de-identified, institutionally-approved image in as `<type>.png` (or
+update the import path in that one component) — nothing else needs to
+change, since every caller only passes a `type` string.
 
 ## Content notes
 
-- Diagrams are schematic only, explicitly labeled "not an actual radiograph."
-  No real radiographs are hotlinked or scraped.
+- Radiographs in `src/assets/radiographs/` are de-identified representative
+  examples supplied directly by the user, one per fracture pattern — not a
+  specific patient's imaging, and not hotlinked or scraped from the web.
 - The `CITATIONS` registry is a verified subset of Egol/Konda's output
   (2002–2026), not their complete bibliography.
 - CRPP fixation currently has no confirmed NYU-specific citation — flagged

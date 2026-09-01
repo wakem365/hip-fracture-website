@@ -19,7 +19,7 @@ export default function DetailCard({ item }) {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
             <FemurSchematic type={item.diagram} />
             <span style={{ fontSize: 10, color: GREY, fontFamily: FONT_MONO, textAlign: "center", maxWidth: 120 }}>
-              Schematic only — not an actual radiograph
+              De-identified radiograph, representative example
             </span>
           </div>
         )}
