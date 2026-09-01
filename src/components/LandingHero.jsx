@@ -140,7 +140,9 @@ export default function LandingHero() {
         </motion.p>
       </motion.div>
 
-      <motion.div
+      <motion.button
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+        aria-label="Scroll to the three stages of care"
         style={{
           position: "absolute",
           left: "50%",
@@ -153,13 +155,17 @@ export default function LandingHero() {
           alignItems: "center",
           gap: 4,
           color: "rgba(255,255,255,0.75)",
+          background: "none",
+          border: "none",
+          padding: 8,
+          cursor: "pointer",
         }}
       >
         <span style={{ fontFamily: FONT_MONO, fontSize: 10.5, letterSpacing: "0.14em", textTransform: "uppercase" }}>Scroll</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>
           <ChevronDown size={20} />
         </motion.div>
-      </motion.div>
+      </motion.button>
     </div>
   );
 }
