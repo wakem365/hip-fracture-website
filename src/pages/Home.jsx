@@ -109,7 +109,7 @@ function HeroPanel({ phase, onSelect }) {
   );
 }
 
-export default function Home({ onSelectPhase, onLiterature }) {
+export default function Home({ onSelectPhase, onLiterature, skipHero = false }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -118,66 +118,75 @@ export default function Home({ onSelectPhase, onLiterature }) {
       transition={{ duration: 0.25 }}
     >
       <style>{`
-        .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); height: 64vh; min-height: 420px; }
+        /* The panel grid + literature band together fill exactly one
+           viewport (flex column, grid grows to take whatever the band
+           doesn't need) so the section reads as its own full "page"
+           instead of a partial block hanging at the top of the screen. */
+        .stage-section { display: flex; flex-direction: column; min-height: 100vh; }
+        .hero-grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
         @media (max-width: 820px) {
-          .hero-grid { grid-template-columns: 1fr; height: auto; }
+          .stage-section { min-height: 0; }
+          .hero-grid { grid-template-columns: 1fr; flex: none; }
           .hero-grid > * { height: 46vh; min-height: 320px; }
         }
       `}</style>
 
-      <LandingHero />
+      {!skipHero && <LandingHero />}
 
-      <motion.div
-        className="hero-grid"
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        {PHASES.map((p) => (
-          <HeroPanel key={p.id} phase={p} onSelect={onSelectPhase} />
-        ))}
-      </motion.div>
+      <div className="stage-section">
+        <motion.div
+          className="hero-grid"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {PHASES.map((p) => (
+            <HeroPanel key={p.id} phase={p} onSelect={onSelectPhase} />
+          ))}
+        </motion.div>
 
-      <motion.button
-        onClick={onLiterature}
-        whileHover={{ filter: "brightness(1.08)" }}
-        whileTap={{ scale: 0.995 }}
-        style={{
-          display: "block",
-          width: "100%",
-          border: "none",
-          padding: "26px 24px",
-          background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})`,
-          cursor: "pointer",
-          textAlign: "left",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 14, maxWidth: 920, margin: "0 auto" }}>
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 10,
-              background: "rgba(255,255,255,0.18)",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <BookOpen size={19} />
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 15.5, fontWeight: 600, color: "#fff", fontFamily: FONT_SERIF }}>The Literature, Over Time</div>
-            <div style={{ fontSize: 12.5, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>
-              {Object.keys(CITATIONS).length} citations, 2002–2026 — how NYU's hip fracture research has evolved.
+        <motion.button
+          onClick={onLiterature}
+          whileHover={{ filter: "brightness(1.08)" }}
+          whileTap={{ scale: 0.995 }}
+          style={{
+            display: "block",
+            width: "100%",
+            border: "none",
+            padding: "26px 24px",
+            background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})`,
+            cursor: "pointer",
+            textAlign: "left",
+            flexShrink: 0,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 14, maxWidth: 920, margin: "0 auto" }}>
+            <div
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 10,
+                background: "rgba(255,255,255,0.18)",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              <BookOpen size={19} />
             </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 15.5, fontWeight: 600, color: "#fff", fontFamily: FONT_SERIF }}>The Literature, Over Time</div>
+              <div style={{ fontSize: 12.5, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>
+                {Object.keys(CITATIONS).length} citations, 2002–2026 — how NYU's hip fracture research has evolved.
+              </div>
+            </div>
+            <ArrowRight size={18} color="#fff" />
           </div>
-          <ArrowRight size={18} color="#fff" />
-        </div>
-      </motion.button>
+        </motion.button>
+      </div>
     </motion.div>
   );
 }
