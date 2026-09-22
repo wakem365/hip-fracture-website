@@ -7,6 +7,7 @@ import preOpImg from "../assets/hero/pre-op.webp";
 import intraOpImg from "../assets/hero/intra-op.png";
 import postOpImg from "../assets/hero/post-op.webp";
 import LandingHero from "../components/LandingHero";
+import WhySurgerySection from "../components/WhySurgerySection";
 import { ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
 const HERO_IMAGES = {
@@ -145,6 +146,8 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
       `}</style>
 
       <LandingHero />
+
+      <WhySurgerySection />
 
       <div className="stage-section" ref={stageRef}>
         <motion.div
