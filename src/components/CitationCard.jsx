@@ -26,7 +26,7 @@ export default function CitationCard({ citation, accentColor }) {
       )}
       {c.verify && (
         <div style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: AMBER, marginLeft: c.doi || c.pmid ? 10 : 0 }}>
-          <AlertCircle size={12} /> journal name inferred — verify
+          <AlertCircle size={12} /> year/journal estimated — verify
         </div>
       )}
     </motion.div>
