@@ -208,7 +208,7 @@ export const CITATIONS = {
     journal: "The Lancet, 395(10225):698–708",
     doi: "10.1016/S0140-6736(20)30058-1",
     type: "trial",
-    note: "2,970 patients, 69 hospitals, 17 countries — surgery within ~6 hours reduced delirium, UTIs, pain, and length of stay versus the ~24-hour standard.",
+    note: "2,970 patients, 69 hospitals, 17 countries — a large international trial comparing accelerated versus standard surgical timing, part of the broader evidence base behind getting to surgery without unnecessary delay.",
   },
   ambulation_pod1: {
     year: 2023,

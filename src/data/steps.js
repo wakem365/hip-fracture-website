@@ -181,9 +181,9 @@ export const STEPS = {
       ],
     },
     {
-      title: "Getting to Surgery Quickly",
-      what: "Your care team tracks the time from when you arrive to when your surgery starts, aiming to operate the next day once you're medically ready.",
-      why: "The largest study on surgery timing found that faster surgery — about 6 hours on average — led to less confusion, fewer urinary infections, and less pain than waiting closer to 24 hours. NYU's own research has also shown that streamlining pre-surgery testing gets patients to the operating room faster without adding risk.",
+      title: "Getting to Surgery Within a Day",
+      what: "Your care team tracks the time from when you arrive to when your surgery starts, with the goal of operating within one calendar day of your arrival, once you're medically ready.",
+      why: "Research — including NYU's own — supports getting to surgery within about a day as the goal, and NYU's pathway work has shown that streamlining pre-surgery testing helps get patients to the operating room faster without adding risk. Surgery doesn't need to happen within a specific number of hours to be safe; what matters is not waiting longer than necessary. Sometimes a short delay past that first day is the safer choice — for example, if you have a heart condition, another injury, or an illness that needs to be treated or stabilized first. In those cases, your team weighs that delay carefully, and the goal becomes getting you to surgery as soon as you're truly ready.",
       citations: [
         "hip_attack",
         "echo_pathway",
