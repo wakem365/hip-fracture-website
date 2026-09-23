@@ -147,7 +147,7 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
 
       <LandingHero />
 
-      <WhySurgerySection />
+      <WhySurgerySection onScrollNext={() => stageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} />
 
       <div className="stage-section" ref={stageRef}>
         <motion.div

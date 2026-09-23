@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { AlertCircle, ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { CITATIONS } from "../data/citations";
 import { HISTORIC_CITATIONS } from "../data/historicCitations";
 import LiteratureLanding from "../components/LiteratureLanding";
 import YearTimeline from "../components/YearTimeline";
-import { AMBER, GREY, VIOLET, FONT_SERIF } from "../theme";
+import { VIOLET, FONT_SERIF } from "../theme";
 
 const COLLECTIONS = {
   historic: { citations: HISTORIC_CITATIONS, label: "Historic NYU Literature" },
@@ -55,19 +55,6 @@ export default function LiteraturePage({ onBack }) {
         ) : (
           <motion.div key={collectionId} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
             <h1 style={{ fontFamily: FONT_SERIF, fontSize: 26, fontWeight: 600, margin: "0 0 24px 0" }}>{collection.label}</h1>
-            {collectionId === "historic" && Object.keys(HISTORIC_CITATIONS).length === 0 && (
-              <p style={{ fontSize: 12.5, color: AMBER, lineHeight: 1.5, marginBottom: 20, display: "flex", gap: 6, alignItems: "flex-start" }}>
-                <AlertCircle size={14} style={{ flexShrink: 0, marginTop: 1 }} />
-                Historic entries haven't been added yet — check back once they're in.
-              </p>
-            )}
-            {collectionId === "current" && (
-              <p style={{ fontSize: 12.5, color: GREY, lineHeight: 1.5, marginBottom: 24, maxWidth: 620 }}>
-                A verified subset, not Egol/Konda's complete bibliography (each has 700–1000+ publications across many
-                fracture types beyond hip). NYU/Egol–Konda work is violet; landmark external trials blue; society
-                guidelines teal; NYU quality-improvement programs amber.
-              </p>
-            )}
             <YearTimeline citations={collection.citations} />
           </motion.div>
         )}
