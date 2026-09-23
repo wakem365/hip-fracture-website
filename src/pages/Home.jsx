@@ -124,15 +124,99 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
     }
   }, [skipHero]);
 
-  // CSS scroll-snap on the three full-screen "pages" (hero, why-surgery,
-  // panel grid) — this is what makes a single wheel tick or touch swipe
-  // advance exactly one page instead of a partial scroll, on both desktop
-  // and mobile, without any custom gesture handling. Scoped to a class on
-  // <html> only while Home is mounted so Phase/Literature pages (normal
-  // scrolling documents) aren't affected.
+  // A single wheel tick or touch swipe advances exactly one full-screen
+  // "page" (landing hero -> why-surgery -> panel grid). This used to be
+  // native CSS scroll-snap, but real wheel/touch input arrives as several
+  // small events per gesture, and the browser's own snap-settle animation
+  // would get interrupted and restarted by each one — that's what read as
+  // "jerky". Driving the scroll ourselves with a fixed-duration eased
+  // animation avoids that and lets us control exactly how slow it feels.
   useEffect(() => {
-    document.documentElement.classList.add("snap-scroll");
-    return () => document.documentElement.classList.remove("snap-scroll");
+    let isAnimating = false;
+    let touchStartY = null;
+    let rafId = null;
+
+    const sectionSelector = ".landing-hero-section, .why-surgery-section, .stage-section";
+
+    function getSections() {
+      return Array.from(document.querySelectorAll(sectionSelector));
+    }
+
+    function currentIndex(sections) {
+      let closest = 0;
+      let minDist = Infinity;
+      sections.forEach((section, i) => {
+        const dist = Math.abs(section.getBoundingClientRect().top);
+        if (dist < minDist) {
+          minDist = dist;
+          closest = i;
+        }
+      });
+      return closest;
+    }
+
+    function animateScrollTo(targetY, duration = 900) {
+      const startY = window.scrollY;
+      const diff = targetY - startY;
+      if (Math.abs(diff) < 1) return;
+      isAnimating = true;
+      const startTime = performance.now();
+      function step(now) {
+        const t = Math.min((now - startTime) / duration, 1);
+        const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        window.scrollTo(0, startY + diff * eased);
+        if (t < 1) {
+          rafId = requestAnimationFrame(step);
+        } else {
+          isAnimating = false;
+          rafId = null;
+        }
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    function goToStep(direction) {
+      const sections = getSections();
+      const idx = currentIndex(sections);
+      const nextIdx = direction > 0 ? Math.min(idx + 1, sections.length - 1) : Math.max(idx - 1, 0);
+      if (nextIdx === idx) return false;
+      const targetY = window.scrollY + sections[nextIdx].getBoundingClientRect().top;
+      animateScrollTo(targetY, 900);
+      return true;
+    }
+
+    function handleWheel(e) {
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
+      if (Math.abs(e.deltaY) < 10) return;
+      if (goToStep(e.deltaY > 0 ? 1 : -1)) e.preventDefault();
+    }
+
+    function handleTouchStart(e) {
+      if (isAnimating) return;
+      touchStartY = e.touches[0].clientY;
+    }
+
+    function handleTouchEnd(e) {
+      if (touchStartY === null || isAnimating) return;
+      const delta = touchStartY - e.changedTouches[0].clientY;
+      touchStartY = null;
+      if (Math.abs(delta) < 50) return;
+      goToStep(delta > 0 ? 1 : -1);
+    }
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -153,18 +237,6 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
           .stage-section { min-height: 0; }
           .hero-grid { grid-template-columns: 1fr; flex: none; }
           .hero-grid > * { height: 46vh; min-height: 320px; }
-        }
-
-        /* One wheel tick or touch swipe advances exactly one full-screen
-           "page" (landing hero -> why-surgery -> panel grid), on both
-           desktop and mobile — native scroll-snap, no gesture JS needed.
-           scroll-snap-stop:always keeps a fast swipe from skipping a page. */
-        html.snap-scroll { scroll-snap-type: y mandatory; }
-        html.snap-scroll .landing-hero-section,
-        html.snap-scroll .why-surgery-section,
-        html.snap-scroll .stage-section {
-          scroll-snap-align: start;
-          scroll-snap-stop: always;
         }
       `}</style>
 
