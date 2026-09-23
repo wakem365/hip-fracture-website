@@ -156,9 +156,15 @@ export const STEPS = {
           ],
         },
         {
-          title: "Hemi / THA",
-          what: "The fractured ball of the hip joint is replaced with an implant (hemiarthroplasty), or the socket is replaced too (total hip arthroplasty).",
-          why: "Used when the fracture disrupts the bone's own blood supply. NYU's award-winning protocol work showed that standardizing the hemi-vs-THA decision improved mortality and length of stay.",
+          title: "Hemiarthroplasty",
+          what: "The fractured ball of the hip joint (femoral head) is removed and replaced with a metal implant, while your own hip socket is left in place. Can be unipolar (one fixed head) or bipolar (an inner head that itself rotates inside an outer shell, reducing wear on your natural socket).",
+          why: "Used when the fracture disrupts the bone's own blood supply, most often in older, lower-demand patients — it's a shorter, less invasive operation than THA with a lower dislocation risk, at the cost of not addressing any arthritis already in the socket.",
+          citations: ["charnley_award", "health_trial", "kugelman2024"],
+        },
+        {
+          title: "Total Hip Arthroplasty (THA)",
+          what: "Both the femoral head and the hip socket are replaced, not just the head. Used selectively after femoral neck fracture — typically in patients who were more active and independent before the fracture, or who already had arthritis in that hip.",
+          why: "NYU's award-winning protocol work (2021 John Charnley Award) found that standardizing the hemi-vs-THA decision improved mortality and length of stay, and NYU has separately studied who specifically benefits from THA after a fracture. Important: a hip-fracture THA is not the same operation as an elective THA for arthritis — it's done urgently on an acutely fractured (not gradually worn-down) joint, in an often frailer trauma population, with different positioning precautions and dislocation-risk considerations than a planned arthritis replacement.",
           citations: [
             "charnley_award",
             "health_trial",
@@ -168,7 +174,6 @@ export const STEPS = {
             "campbell2020",
             "solasz2023",
             "solasz2023_2",
-            "kugelman2024",
             "hammond2026",
             "schultz2021",
           ],
@@ -222,6 +227,35 @@ export const STEPS = {
       what: "Blood thinner (or mechanical device) started to prevent clots.",
       why: "Surgery and immobility both raise clot risk sharply, so this starts almost immediately unless bleeding risk says otherwise.",
       citations: ["aaos_cpg_2021", "jeong2007", "macdonald2020"],
+    },
+    {
+      title: "Avoiding Common Complications",
+      subSteps: [
+        {
+          title: "Urinary Tract Infection (UTI)",
+          what: "A bladder infection — one of the most common complications after hip fracture surgery.",
+          why: "A urinary catheter is often placed for surgery and can introduce bacteria, and immobility makes it harder to fully empty the bladder. The single biggest prevention lever is removing the catheter as early as possible (usually within a day) and getting patients up to void normally rather than leaving it in \"just in case.\"",
+          citations: ["aaos_cpg_2021"],
+        },
+        {
+          title: "Pneumonia",
+          what: "A lung infection, often from shallow breathing and a weak cough while lying in bed, sometimes compounded by swallowing difficulty around anesthesia and sedating pain medication.",
+          why: "Sitting patients upright, encouraging deep breathing (incentive spirometry), and getting them out of bed as early as possible keeps the lungs clear — this is one of the main reasons early mobilization on postoperative day 1 matters so much.",
+          citations: ["ambulation_pod1", "aaos_cpg_2021"],
+        },
+        {
+          title: "Delirium (Confusion)",
+          what: "A sudden state of confusion or disorientation, common in older hip fracture patients — driven by the stress of surgery and anesthesia, pain, disrupted sleep, and certain medications (especially opioids and other sedating drugs).",
+          why: "The team limits sedating medications where possible, controls pain without over-relying on opioids, and keeps patients oriented (clocks, family presence, minimizing overnight disruption). Anesthesia choice matters too — NYU's own data found MAC-STILA was associated with less postoperative delirium than general anesthesia.",
+          citations: ["macstila_outcomes", "aaos_cpg_2021"],
+        },
+        {
+          title: "Pressure Injuries (Bedsores)",
+          what: "Skin breakdown over bony areas — heels, tailbone, hips — from staying in one position too long, especially for patients who can't reposition themselves easily.",
+          why: "Frequent repositioning and pressure-relieving mattresses help, but the biggest defense is the same one that prevents pneumonia and blood clots: getting patients out of bed and moving as early as it's safe to do so.",
+          citations: ["ambulation_pod1"],
+        },
+      ],
     },
     {
       title: "Discharge Planning",
