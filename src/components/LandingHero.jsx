@@ -45,7 +45,7 @@ export default function LandingHero() {
   const cueOpacity = useTransform(smooth, [0, 0.25], [1, 0]);
 
   return (
-    <div ref={sectionRef} style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#000" }}>
+    <div ref={sectionRef} className="landing-hero-section" style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#000" }}>
       <motion.img
         src={buildingImg}
         alt=""

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { PHASES } from "../data/steps";
@@ -124,6 +124,17 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
     }
   }, [skipHero]);
 
+  // CSS scroll-snap on the three full-screen "pages" (hero, why-surgery,
+  // panel grid) — this is what makes a single wheel tick or touch swipe
+  // advance exactly one page instead of a partial scroll, on both desktop
+  // and mobile, without any custom gesture handling. Scoped to a class on
+  // <html> only while Home is mounted so Phase/Literature pages (normal
+  // scrolling documents) aren't affected.
+  useEffect(() => {
+    document.documentElement.classList.add("snap-scroll");
+    return () => document.documentElement.classList.remove("snap-scroll");
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -142,6 +153,18 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
           .stage-section { min-height: 0; }
           .hero-grid { grid-template-columns: 1fr; flex: none; }
           .hero-grid > * { height: 46vh; min-height: 320px; }
+        }
+
+        /* One wheel tick or touch swipe advances exactly one full-screen
+           "page" (landing hero -> why-surgery -> panel grid), on both
+           desktop and mobile — native scroll-snap, no gesture JS needed.
+           scroll-snap-stop:always keeps a fast swipe from skipping a page. */
+        html.snap-scroll { scroll-snap-type: y mandatory; }
+        html.snap-scroll .landing-hero-section,
+        html.snap-scroll .why-surgery-section,
+        html.snap-scroll .stage-section {
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
         }
       `}</style>
 
