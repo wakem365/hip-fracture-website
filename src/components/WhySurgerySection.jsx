@@ -6,16 +6,16 @@ import { INK, GREY, TINT, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
 const POINTS = [
   {
-    title: "It's an Unstable Fracture",
-    body: "Most hip fractures — displaced femoral neck, intertrochanteric, subtrochanteric — can't bear weight on their own. Without fixation, the fragments keep moving under normal loading: every attempt to stand or shift in bed re-injures the site, so the fracture can't heal and the pain never settles.",
+    title: "The Broken Bone Can't Hold Your Weight",
+    body: "Most hip fractures leave the bone too broken to hold you up on its own. Without surgery to hold the pieces together, they keep shifting every time you try to stand or even move in bed — so the bone can't heal, and the pain never really goes away.",
   },
   {
-    title: "Immobility Is the Real Danger",
-    body: "An unfixed hip fracture leaves a patient essentially bedbound. Prolonged bed rest in an older adult sharply raises the risk of blood clots (DVT/PE), pneumonia, pressure ulcers, rapid muscle loss, and delirium — complications that compound quickly and are harder to reverse the longer they go on.",
+    title: "Staying in Bed Is the Real Danger",
+    body: "Without surgery, most patients are stuck in bed. For an older adult, lying in bed for a long time sharply raises the risk of blood clots, pneumonia, bedsores, fast muscle loss, and confusion — problems that build on each other quickly and get harder to fix the longer they go on.",
   },
   {
-    title: "Untreated, It Can Be Life-Threatening",
-    body: "Mortality after hip fracture remains substantial even with modern surgical care — and NYU's own population-scale data shows delay and non-operative management raise that risk further. Getting patients safely and promptly to surgery is the single biggest lever the care team has.",
+    title: "Left Untreated, It Can Be Life-Threatening",
+    body: "Even with today's medical care, a hip fracture is a serious, sometimes life-threatening injury. NYU's own research on a large group of patients shows that waiting too long for surgery — or skipping it altogether — raises that risk even further. Getting patients safely and quickly to surgery is the single biggest thing the care team can do to protect you.",
   },
 ];
 

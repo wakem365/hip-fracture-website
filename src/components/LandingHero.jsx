@@ -116,7 +116,7 @@ export default function LandingHero() {
         </motion.div>
 
         <StaggeredTitle
-          text="Hip Fracture, Step by Step"
+          text="A Guide to Hip Fractures"
           style={{
             fontFamily: FONT_SERIF,
             fontSize: "clamp(38px, 6.5vw, 72px)",
