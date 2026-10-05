@@ -186,12 +186,20 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
     }
 
     function handleWheel(e) {
-      if (isAnimating) {
-        e.preventDefault();
-        return;
-      }
-      if (Math.abs(e.deltaY) < 10) return;
-      if (goToStep(e.deltaY > 0 ? 1 : -1)) e.preventDefault();
+      // Always take over the wheel event — letting any of it fall through
+      // to native scrolling (even a few pixels) desyncs our section
+      // tracking and shows up as a jittery half-step before the real
+      // animated transition kicks in.
+      e.preventDefault();
+      if (isAnimating) return;
+      // A physical mouse wheel commonly reports deltaY in "line" mode
+      // (e.g. 3), not pixels — comparing that directly against a pixel
+      // threshold meant most mouse ticks fell through to native scroll
+      // instead of triggering our smooth animation. Normalize to pixels
+      // first so mice and trackpads are judged the same way.
+      const delta = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+      if (Math.abs(delta) < 4) return;
+      goToStep(delta > 0 ? 1 : -1);
     }
 
     function handleTouchStart(e) {
