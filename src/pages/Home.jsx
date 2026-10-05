@@ -186,12 +186,10 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
     }
 
     function handleWheel(e) {
-      // Always take over the wheel event — letting any of it fall through
-      // to native scrolling (even a few pixels) desyncs our section
-      // tracking and shows up as a jittery half-step before the real
-      // animated transition kicks in.
-      e.preventDefault();
-      if (isAnimating) return;
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
       // A physical mouse wheel commonly reports deltaY in "line" mode
       // (e.g. 3), not pixels — comparing that directly against a pixel
       // threshold meant most mouse ticks fell through to native scroll
@@ -199,7 +197,12 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
       // first so mice and trackpads are judged the same way.
       const delta = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
       if (Math.abs(delta) < 4) return;
-      goToStep(delta > 0 ? 1 : -1);
+      // Only take over the event when there's actually a section to snap
+      // to — once you're on the last section, let native scrolling
+      // through so content taller than one viewport (e.g. the stacked
+      // panels + literature band on a narrow screen) can still be
+      // reached by scrolling normally.
+      if (goToStep(delta > 0 ? 1 : -1)) e.preventDefault();
     }
 
     function handleTouchStart(e) {
