@@ -23,12 +23,24 @@ export default function PhasePage({ phaseId, onBack }) {
 
   return (
     <motion.div
+      className="page-container"
       initial={{ opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -16 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      style={{ maxWidth: 880, margin: "0 auto", padding: "40px 24px" }}
+      style={{ maxWidth: 880, margin: "0 auto", paddingTop: 40, paddingLeft: 24, paddingRight: 24 }}
     >
+      <style>{`
+        /* The floating "Take our survey" button is position:fixed, so no
+           amount of scrolling moves it off content beneath it — give the
+           page enough bottom clearance that the disclaimer text at the
+           bottom doesn't end up permanently hidden behind it, with more
+           room on narrow screens where the button covers relatively more. */
+        .page-container { padding-bottom: 40px; }
+        @media (max-width: 820px) {
+          .page-container { padding-bottom: 96px; }
+        }
+      `}</style>
       <motion.button
         onClick={onBack}
         whileHover={{ x: -3 }}

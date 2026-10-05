@@ -36,11 +36,12 @@ export default function YearTimeline({ citations }) {
   const activeEntries = selectedYear != null ? (byYear.get(selectedYear) || []).slice().sort((a, b) => a.title.localeCompare(b.title)) : [];
 
   return (
-    <div style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
+    <div className="year-timeline-root" style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
       <style>{`
         .year-rail { display: flex; flex-direction: column; align-items: flex-start; flex-shrink: 0; width: 84px; position: sticky; top: 24px; }
         @media (max-width: 700px) {
-          .year-rail { position: static; flex-direction: row; flex-wrap: wrap; width: auto; gap: 6px 10px; }
+          .year-timeline-root { flex-direction: column; }
+          .year-rail { position: static; flex-direction: row; flex-wrap: wrap; width: 100%; max-width: 100%; gap: 6px 10px; }
           .year-rail-line { display: none; }
         }
       `}</style>

@@ -233,10 +233,18 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
            instead of a partial block hanging at the top of the screen. */
         .stage-section { display: flex; flex-direction: column; min-height: 100vh; }
         .hero-grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+        /* The floating "Take our survey" button is position:fixed, so no
+           amount of scrolling moves it off the literature band beneath it —
+           the only way to keep the band's text from being covered is to
+           give the band itself enough bottom padding that it ends above
+           where the fixed button sits. It covers relatively more of the
+           band on a narrow screen, so it needs more clearance there. */
+        .literature-cta { padding-bottom: 26px; }
         @media (max-width: 820px) {
           .stage-section { min-height: 0; }
           .hero-grid { grid-template-columns: 1fr; flex: none; }
           .hero-grid > * { height: 46vh; min-height: 320px; }
+          .literature-cta { padding-bottom: 92px; }
         }
       `}</style>
 
@@ -259,13 +267,16 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
 
         <motion.button
           onClick={onLiterature}
+          className="literature-cta"
           whileHover={{ filter: "brightness(1.08)" }}
           whileTap={{ scale: 0.995 }}
           style={{
             display: "block",
             width: "100%",
             border: "none",
-            padding: "26px 24px",
+            paddingTop: 26,
+            paddingLeft: 24,
+            paddingRight: 24,
             background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})`,
             cursor: "pointer",
             textAlign: "left",
