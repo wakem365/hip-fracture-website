@@ -241,7 +241,7 @@ export const STEPS = {
           title: "Urinary Tract Infection (UTI)",
           what: "A bladder infection — one of the most common problems after hip fracture surgery.",
           why: "A urinary catheter is no longer routinely placed for every patient the way it once was — your team places one only when it's genuinely needed, not automatically or \"just in case.\" If one is placed, the team works to remove it as early as possible, usually within a day, and gets you up to use the bathroom on your own. Avoiding a UTI altogether is the goal: limiting catheter use in the first place, and removing one quickly when it is needed, are the two biggest ways the team works to prevent one.",
-          citations: ["aaos_cpg_2021"],
+          citations: ["aaos_cpg_2021", "pull_the_foley"],
         },
         {
           title: "Pneumonia",

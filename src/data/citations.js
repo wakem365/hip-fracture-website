@@ -19,6 +19,16 @@
 // changes needed.
 // ---------------------------------------------------------------------------
 export const CITATIONS = {
+  pull_the_foley: {
+    year: 2020,
+    authors: "Konda SR, Johnson JR, Kelly EA, Egol KA",
+    title: "Pull the Foley: Improved Quality for Middle-Aged and Geriatric Trauma Patients Without Indwelling Catheters.",
+    journal: "Journal for Healthcare Quality, 42(6):341-351",
+    doi: "10.1097/JHQ.0000000000000241",
+    pmid: "33149051",
+    type: "nyu",
+    note: "NYU quality-improvement study: avoiding routine indwelling urinary catheters in middle-aged and geriatric trauma patients was linked to better quality outcomes — the evidence behind not placing a catheter by default and removing one early when it is placed.",
+  },
   eisler2002_nondisplaced_fnf: {
     year: 2002,
     authors: "Eisler J, Cornwall R, Strauss E, Koval K, Alton S, Gilbert M",
