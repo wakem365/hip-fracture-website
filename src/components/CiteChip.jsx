@@ -7,7 +7,7 @@ export default function CiteChip({ id }) {
   const c = CITATIONS[id];
   if (!c) return null;
   const badgeColor = c.type === "trial" ? "#3C5A8A" : c.type === "program" ? AMBER : c.type === "guideline" ? TEAL : ULTRA_VIOLET;
-  const badgeLabel = c.type === "trial" ? "Landmark trial" : c.type === "program" ? "NYU program" : c.type === "guideline" ? "Society guideline" : "NYU / Egol–Konda";
+  const badgeLabel = c.type === "trial" ? "Landmark trial" : c.type === "program" ? "NYU program" : c.type === "guideline" ? "Society guideline" : "NYU";
   const link = c.doi ? `https://doi.org/${c.doi}` : c.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${c.pmid}/` : null;
 
   return (

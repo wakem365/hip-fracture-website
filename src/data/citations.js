@@ -1,14 +1,16 @@
 // ---------------------------------------------------------------------------
 // CITATION REGISTRY
-// "nyu"      = Egol/Konda group (NYU Langone Orthopedic Center / NYU
-//              Hospital for Joint Diseases), verified via PubMed/journal search
+// "nyu"      = NYU Langone Orthopedics hip fracture research group (NYU
+//              Langone Orthopedic Center / NYU Hospital for Joint Diseases),
+//              verified via PubMed/journal search
 // "trial"    = landmark external RCT
 // "guideline"= society/consortium reference standard (OTA/AO, AAOS)
 // "program"  = NYU quality-improvement initiative (not peer-reviewed)
 //
-// This is a real, search-verified SUBSET of Egol & Konda's output, not their
-// full bibliography (each has 700-1000+ publications across many fracture
-// types). Spans 2002-2026 to show the group's work over time. DOIs are real
+// This is a real, search-verified SUBSET of the group's output, not their
+// full bibliography (the group's authors each have 700-1000+ publications
+// across many fracture types). Spans 2002-2026 to show the group's work over
+// time. DOIs are real
 // and confirmed where present; two journal names are inferred from
 // publisher/DOI pattern and marked verify:true.
 //

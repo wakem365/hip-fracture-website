@@ -135,7 +135,7 @@ export const STEPS = {
           citations: ["kaplan_it_review", "bong2004"],
         },
         {
-          title: "Rod in the Bone (IMN)",
+          title: "Intramedullary Nail (IMN)",
           what: "A metal rod is placed down the center of the thighbone and held in place with screws.",
           why: "This option is chosen for breaks that are less stable, because the rod gives stronger support than a plate on the outside of the bone.",
           citations: [
@@ -175,9 +175,9 @@ export const STEPS = {
       ],
     },
     {
-      title: "Getting to Surgery Within a Day",
-      what: "Your care team tracks the time from when you arrive to when your surgery starts, with the goal of operating within one calendar day of your arrival, once you're medically ready.",
-      why: "Research — including NYU's own — supports getting to surgery within about a day as the goal, and NYU's pathway work has shown that streamlining pre-surgery testing helps get patients to the operating room faster without adding risk. Surgery doesn't need to happen within a specific number of hours to be safe; what matters is not waiting longer than necessary. Sometimes a short delay past that first day is the safer choice — for example, if you have a heart condition, another injury, or an illness that needs to be treated or stabilized first. In those cases, your team weighs that delay carefully, and the goal becomes getting you to surgery as soon as you're truly ready.",
+      title: "Targeting Next Calendar Day Surgery",
+      what: "Your care team tracks the time from when you arrive to when your surgery starts, with the goal of operating by the next calendar day, once you're medically ready.",
+      why: "The goal here is the next calendar day — not a strict 24-hour clock. If you arrive the evening before, surgery the following morning or afternoon still meets this goal, even though more than 24 hours may have passed. Research — including NYU's own — supports this next-day target, and NYU's pathway work has shown that streamlining pre-surgery testing helps get patients to the operating room without unnecessary delay and without adding risk. Sometimes a short delay past the next day is the safer choice — for example, if you have a heart condition, another injury, or an illness that needs to be treated or stabilized first. In those cases, your team weighs that delay carefully, and the goal becomes getting you to surgery as soon as you're truly ready.",
       citations: [
         "hip_attack",
         "echo_pathway",
@@ -208,6 +208,18 @@ export const STEPS = {
           why: "Opioids raise the risk of confusion and falls in older adults. The numbing injections given during surgery are meant to lower how much opioid medicine you need in the first place.",
           citations: ["macstila_outcomes", "aaos_cpg_2021", "ihejirikalomedico2023"],
         },
+        {
+          title: "Anti-Inflammatory Medicine",
+          what: "Medicine that reduces pain and inflammation (sometimes called NSAIDs), used selectively alongside your other pain control.",
+          why: "Adding another type of pain reliever on top of scheduled Tylenol can further lower how much opioid medicine you need. Your team picks this option carefully, since it isn't the right fit for every patient — for example, those with certain kidney, stomach, or bleeding risks.",
+          citations: ["aaos_cpg_2021"],
+        },
+        {
+          title: "Nerve-Calming Medicine (Gabapentinoids)",
+          what: "Medicine originally developed for nerve pain (such as gabapentin), sometimes added in small doses as another part of your pain plan.",
+          why: "Used carefully and selectively, this is another tool that can help lower how much opioid medicine you need. Your team weighs it against side effects like drowsiness, which can be more of a risk for older adults.",
+          citations: ["aaos_cpg_2021"],
+        },
       ],
     },
     {
@@ -228,7 +240,7 @@ export const STEPS = {
         {
           title: "Urinary Tract Infection (UTI)",
           what: "A bladder infection — one of the most common problems after hip fracture surgery.",
-          why: "A tube (catheter) is often placed in your bladder for surgery and can introduce bacteria, and lying still makes it harder to fully empty your bladder. The single best way to prevent this is removing the catheter as early as possible — usually within a day — and getting you up to use the bathroom on your own rather than leaving it in \"just in case.\"",
+          why: "A urinary catheter is no longer routinely placed for every patient the way it once was — your team places one only when it's genuinely needed, not automatically or \"just in case.\" If one is placed, the team works to remove it as early as possible, usually within a day, and gets you up to use the bathroom on your own. Avoiding a UTI altogether is the goal: limiting catheter use in the first place, and removing one quickly when it is needed, are the two biggest ways the team works to prevent one.",
           citations: ["aaos_cpg_2021"],
         },
         {
@@ -256,9 +268,8 @@ export const STEPS = {
       subSteps: [
         {
           title: "Home (No Services)",
-          tag: "Target — best outcomes",
           what: "You go straight home without extra home-care services, usually using a walker or cane, with follow-up appointments scheduled afterward.",
-          why: "This is the goal whenever it's safely possible. NYU's own data — and a hospital-wide \"Home Is Best\" program built from it — show that patients who go straight home have fewer complications, like urinary infections, kidney problems, and blood clots, than patients discharged elsewhere.",
+          why: "This is one possible path after surgery, for patients where it's safely achievable. NYU's own data — and a hospital-wide \"Home Is Best\" program built from it — show that patients who go straight home have fewer complications, like urinary infections, kidney problems, and blood clots, than patients discharged elsewhere.",
           citations: [
             "discharge_sttgma",
             "home_discharge_program",
@@ -271,14 +282,20 @@ export const STEPS = {
         {
           title: "Home with Services",
           what: "You go home, but a visiting nurse and/or physical therapist comes to you.",
-          why: "This option bridges the gap for patients who need more support than family alone can give. NYU's research found that home health services led to better outcomes for the cost than a stay at a skilled nursing facility, for patients who could safely choose either one.",
+          why: "This option is for patients who could benefit from some extra support during recovery — it isn't about what family is or isn't able to do. NYU's research found that home health services led to better outcomes for the cost than a stay at a skilled nursing facility, for patients who could safely choose either one.",
           citations: ["snf_value"],
         },
         {
           title: "Rehab Facility",
-          what: "A short stay at a rehab facility for more intensive physical therapy before you go home.",
+          what: "A short stay at a subacute rehab unit or skilled nursing facility (SNF) for more intensive physical therapy before you go home — this is the most common type of \"rehab facility\" after a hip fracture, distinct from an inpatient rehab hospital.",
           why: "This is reserved for patients who need more recovery time than home-based care can offer. The goal is still to get you home as soon as it's safe — NYU's research found that, when either option was medically appropriate, a stay at a skilled nursing facility provided less value than getting home health services instead.",
           citations: ["snf_value"],
+        },
+        {
+          title: "Hospice Care",
+          what: "For patients who were already dealing with serious, advanced illness before their fracture, hospice focuses on comfort and quality of life rather than continued recovery-focused treatment.",
+          why: "This is not the common outcome after a hip fracture — most patients go on to rehabilitation or recovery at home. It's an option your care team may gently raise only for patients who were already very sick before the injury, or whose health has changed significantly since, so your care matches what matters most to you and your family.",
+          citations: ["hammond2025", "mercer2025"],
         },
       ],
     },
