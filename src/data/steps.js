@@ -108,7 +108,7 @@ export const STEPS = {
         {
           title: "MAC-STILA",
           what: "Light sedation plus numbing medicine injected directly into the surgery site by the surgeon — no spinal or general anesthesia needed at all.",
-          why: "This approach was developed and studied at NYU for patients who are too frail for spinal positioning or general anesthesia. It's linked to less confusion after surgery.",
+          why: "This approach was developed by NYU physicians and studied at NYU for patients who are too frail for spinal positioning or general anesthesia. It's linked to less confusion after surgery.",
           citations: ["macstila_technique", "macstila_guide", "macstila_outcomes"],
         },
         {
@@ -117,25 +117,19 @@ export const STEPS = {
           why: "This technique was developed and named at NYU Langone Orthopedic Hospital as a way to safely fix a hip fracture using only a nerve block and sedation, in patients where that's a good fit.",
           citations: ["loh_block", "herbosa2025"],
         },
-        {
-          title: "Nerve Block",
-          what: "Numbing medicine injected near the nerves around your hip during surgery, given in addition to spinal, general, or MAC-STILA anesthesia.",
-          why: "This blocks pain at the source before you wake up, so you need less opioid pain medicine afterward and can get moving in physical therapy sooner.",
-          citations: ["aaos_cpg_2021", "ihejirikalomedico2023"],
-        },
       ],
     },
     {
       title: "How Your Hip Will Be Fixed",
       subSteps: [
         {
-          title: "Pins (CRPP)",
-          what: "Your surgeon lines up the broken bone without opening up the hip, then holds it in place with pins or screws put in through small cuts in the skin.",
+          title: "Screw Fixation",
+          what: "Your surgeon lines up the broken bone without opening up the hip, then holds it in place with screws put in through small cuts in the skin.",
           why: "This option is used for breaks that are stable and only slightly out of place — usually breaks in the neck of the thighbone — where this less invasive repair can still hold the bone securely.",
-          evidence: "Fixation-method literature — NYU-specific citation not yet identified",
+          citations: ["eisler2002_nondisplaced_fnf"],
         },
         {
-          title: "Sliding Hip Screw",
+          title: "Plate and Screw Construct",
           what: "A large screw is placed through the neck into the ball of the hip, attached to a metal plate on the side of the bone. The screw can slide a bit as the bone heals and settles into place.",
           why: "This is a reliable, well-tested option for stable breaks between the trochanters, letting the two ends of the bone compress together as they heal.",
           citations: ["kaplan_it_review", "bong2004"],
@@ -157,7 +151,7 @@ export const STEPS = {
         },
         {
           title: "Partial Hip Replacement",
-          what: "The broken ball of your hip joint is removed and replaced with a metal implant. Your own hip socket is left in place. This can be \"unipolar\" (one solid implant head) or \"bipolar\" (an inner head that itself rotates inside an outer shell, which wears less on your natural socket).",
+          what: "The broken ball of your hip joint is removed and replaced with a metal implant. Your own hip socket is left in place.",
           why: "This is used when the break has cut off blood supply to the bone — most often in older patients who don't need as much hip strength for daily life. It's a shorter, less invasive surgery with a lower chance of the joint popping out of place, but it doesn't treat any arthritis that may already be in your hip socket.",
           citations: ["charnley_award", "health_trial", "kugelman2024"],
         },

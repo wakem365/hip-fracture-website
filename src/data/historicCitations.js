@@ -18,7 +18,8 @@
 // pathway step cites them, or they were already picked up by the earlier
 // PubMed bulk import — are deliberately NOT duplicated here: egol1997,
 // hgb2002 (Gruson admission hemoglobin), bong2004, kubiak2004, idaji2005,
-// heibert2005, liporace2005, endo2005, susarla2006, jeong2007, penrod2008.
+// heibert2005, liporace2005, endo2005, susarla2006, jeong2007, penrod2008,
+// eisler2002_nondisplaced_fnf (cites the screw fixation pathway step).
 // The deck also repeats "Mortality Risk After Hip Fracture" (Richmond et
 // al.) twice on two different slides — kept once here.
 // ---------------------------------------------------------------------------
@@ -270,15 +271,6 @@ export const HISTORIC_CITATIONS = {
     doi: null,
     type: "nyu",
     note: "Cadaveric biomechanical study finding 30° of posterior sag did not significantly reduce construct strength or stability of sliding hip screw fixation — malreduction in the sagittal plane doesn't necessarily compromise implant performance (though it may still affect healing).",
-  },
-  eisler2002_nondisplaced_fnf: {
-    year: 2002,
-    authors: "Eisler J, Cornwall R, Strauss E, Koval K, Alton S, Gilbert M",
-    title: "Outcomes of Elderly Patients With Nondisplaced Femoral Neck Fractures.",
-    journal: "Clinical Orthopaedics and Related Research",
-    doi: null,
-    type: "nyu",
-    note: "Prospective study of 70 patients with nondisplaced femoral neck fractures treated with screw fixation — age and initial functional status independently predicted 3-month locomotion outcomes; operative time, blood loss, and anesthesia type did not affect outcomes.",
   },
   aharonoff1998_circumstances_of_falls: {
     year: 1998,

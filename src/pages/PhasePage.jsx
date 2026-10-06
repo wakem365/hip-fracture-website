@@ -95,8 +95,7 @@ export default function PhasePage({ phaseId, onBack }) {
       <p style={{ fontSize: 12, color: GREY, marginTop: 18, lineHeight: 1.5 }}>
         Prototype only — steps and explanations are placeholders to demonstrate the concept. Radiographs are
         de-identified representative examples, not a specific patient's imaging. Citations shown are real, verified
-        papers, but a couple of evidence tags still say "not yet identified" — flag those and I'll search further,
-        or send the paper you have in mind.
+        papers.
       </p>
     </motion.div>
   );

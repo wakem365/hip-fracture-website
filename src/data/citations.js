@@ -17,6 +17,15 @@
 // changes needed.
 // ---------------------------------------------------------------------------
 export const CITATIONS = {
+  eisler2002_nondisplaced_fnf: {
+    year: 2002,
+    authors: "Eisler J, Cornwall R, Strauss E, Koval K, Alton S, Gilbert M",
+    title: "Outcomes of Elderly Patients With Nondisplaced Femoral Neck Fractures.",
+    journal: "Clinical Orthopaedics and Related Research",
+    doi: null,
+    type: "nyu",
+    note: "Prospective study of 70 patients with nondisplaced femoral neck fractures treated with screw fixation — age and initial functional status independently predicted 3-month locomotion outcomes; operative time, blood loss, and anesthesia type did not affect outcomes.",
+  },
   ota_compendium: {
     year: 2018,
     authors: "Meinberg E, Agel J, Roberts C, Karam M, Kellam J",
