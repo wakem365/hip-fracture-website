@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PHASES, STEPS } from "../data/steps";
@@ -6,7 +6,7 @@ import TimelineRow from "../components/TimelineRow";
 import DetailCard from "../components/DetailCard";
 import { GREY, INK, TINT, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
-export default function PhasePage({ phaseId, onBack }) {
+export default function PhasePage({ phaseId, onBack, onReachEnd }) {
   const [majorIndex, setMajorIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
 
@@ -15,6 +15,13 @@ export default function PhasePage({ phaseId, onBack }) {
   const major = steps[majorIndex];
   const hasSubs = Boolean(major.subSteps);
   const detailItem = hasSubs ? major.subSteps[subIndex] : major;
+
+  // Lets the caller know once the visitor has paged through to the last
+  // major step — used to gate the survey popup on actually having gone
+  // through the timeline, rather than popping up on a page-load timer.
+  useEffect(() => {
+    if (onReachEnd && majorIndex === steps.length - 1) onReachEnd();
+  }, [majorIndex, onReachEnd, steps.length]);
 
   const selectMajor = (i) => {
     setMajorIndex(i);

@@ -63,7 +63,11 @@ function ScalePicker({ value, onChange }) {
   );
 }
 
-export default function SurveyWidget() {
+// `enabled` gates the whole widget on having gone through the After Surgery
+// timeline (see App.jsx) — the button doesn't exist at all before that, and
+// the auto-open countdown only starts once it becomes true, rather than
+// firing on a page-load timer regardless of what the visitor has read.
+export default function SurveyWidget({ enabled }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState("form"); // "form" | "thanks"
   const [helped, setHelped] = useState(null); // "Yes" | "No"
@@ -73,6 +77,8 @@ export default function SurveyWidget() {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
+    if (!enabled) return;
+
     let dismissed = false;
     let completed = false;
     try {
@@ -85,7 +91,7 @@ export default function SurveyWidget() {
 
     const timer = setTimeout(() => setOpen(true), AUTO_OPEN_DELAY_MS);
     return () => clearTimeout(timer);
-  }, []);
+  }, [enabled]);
 
   const close = (persistDismiss) => {
     setOpen(false);
@@ -115,6 +121,8 @@ export default function SurveyWidget() {
     setStep("thanks");
     setTimeout(() => close(true), 1800);
   };
+
+  if (!enabled) return null;
 
   return (
     <>

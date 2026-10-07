@@ -135,6 +135,7 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
     let isAnimating = false;
     let touchStartY = null;
     let rafId = null;
+    let safetyTimer = null;
 
     const sectionSelector = ".landing-hero-section, .why-surgery-section, .stage-section";
 
@@ -161,6 +162,16 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
       if (Math.abs(diff) < 1) return;
       isAnimating = true;
       const startTime = performance.now();
+      // requestAnimationFrame can stall mid-animation — a backgrounded tab,
+      // or the reflow some browsers do when entering/exiting fullscreen —
+      // and if that happens while isAnimating is true, wheel/touch input
+      // would be silently swallowed forever with no way to scroll again.
+      // This safety timer guarantees isAnimating always gets released even
+      // if the rAF loop itself never finishes.
+      clearTimeout(safetyTimer);
+      safetyTimer = setTimeout(() => {
+        isAnimating = false;
+      }, duration + 1000);
       function step(now) {
         const t = Math.min((now - startTime) / duration, 1);
         const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -170,6 +181,7 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
         } else {
           isAnimating = false;
           rafId = null;
+          clearTimeout(safetyTimer);
         }
       }
       rafId = requestAnimationFrame(step);
@@ -218,15 +230,28 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
       goToStep(delta > 0 ? 1 : -1);
     }
 
+    // Belt-and-suspenders release valve: entering/exiting fullscreen or
+    // switching tabs mid-animation is exactly the kind of moment that can
+    // stall requestAnimationFrame, so drop the lock immediately on either
+    // event rather than waiting on the safety timer above.
+    function releaseLock() {
+      isAnimating = false;
+    }
+
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    document.addEventListener("visibilitychange", releaseLock);
+    document.addEventListener("fullscreenchange", releaseLock);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("visibilitychange", releaseLock);
+      document.removeEventListener("fullscreenchange", releaseLock);
       if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(safetyTimer);
     };
   }, []);
 
