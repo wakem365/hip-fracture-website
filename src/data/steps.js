@@ -124,6 +124,7 @@ export const STEPS = {
       subSteps: [
         {
           title: "Screw Fixation",
+          diagram: "screw_fixation",
           what: "Your surgeon lines up the broken bone without opening up the hip, then holds it in place with screws put in through small cuts in the skin.",
           why: "This option is used for breaks that are stable and only slightly out of place — usually breaks in the neck of the thighbone — where this less invasive repair can still hold the bone securely.",
           citations: ["eisler2002_nondisplaced_fnf"],
@@ -136,6 +137,7 @@ export const STEPS = {
         },
         {
           title: "Intramedullary Nail (IMN)",
+          diagram: "imn",
           what: "A metal rod is placed down the center of the thighbone and held in place with screws.",
           why: "This option is chosen for breaks that are less stable, because the rod gives stronger support than a plate on the outside of the bone.",
           citations: [
@@ -151,6 +153,7 @@ export const STEPS = {
         },
         {
           title: "Partial Hip Replacement",
+          diagram: "hemi",
           what: "The broken ball of your hip joint is removed and replaced with a metal implant. Your own hip socket is left in place.",
           why: "This is used when the break has cut off blood supply to the bone — most often in older patients who don't need as much hip strength for daily life. It's a shorter, less invasive surgery with a lower chance of the joint popping out of place, but it doesn't treat any arthritis that may already be in your hip socket.",
           citations: ["charnley_award", "health_trial", "kugelman2024"],
