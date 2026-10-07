@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { PHASES } from "../data/steps";
 import { CITATIONS } from "../data/citations";
-import preOpImg from "../assets/hero/pre-op.webp";
+import preOpImg from "../assets/hero/pre-op.jpg";
 import intraOpImg from "../assets/hero/intra-op.png";
 import postOpImg from "../assets/hero/post-op.webp";
 import LandingHero from "../components/LandingHero";
