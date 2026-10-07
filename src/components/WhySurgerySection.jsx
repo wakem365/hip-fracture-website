@@ -2,7 +2,12 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import EvidenceDropdown from "./EvidenceDropdown";
+import ambulationImg from "../assets/why-surgery/ambulation.jpg";
 import { INK, GREY, TINT, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
+
+// Card background at 80% opacity (per request) so the background photo
+// reads faintly through the cards too, not just around them.
+const CARD_BG = "rgba(87, 6, 140, 0.8)";
 
 const POINTS = [
   {
@@ -55,9 +60,24 @@ export default function WhySurgerySection({ onScrollNext }) {
         padding: "64px 24px",
         boxSizing: "border-box",
         position: "relative",
+        overflow: "hidden",
       }}
     >
-      <motion.div style={{ maxWidth: 920, margin: "0 auto", width: "100%", opacity: contentOpacity, y: contentY }}>
+      <img
+        src={ambulationImg}
+        alt=""
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center 25%",
+          opacity: 0.3,
+        }}
+      />
+
+      <motion.div style={{ position: "relative", zIndex: 1, maxWidth: 920, margin: "0 auto", width: "100%", opacity: contentOpacity, y: contentY }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.14em", color: VIOLET, textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}>
           The Case for Surgery
         </div>
@@ -74,7 +94,7 @@ export default function WhySurgerySection({ onScrollNext }) {
             <div
               key={pt.title}
               style={{
-                background: VIOLET,
+                background: CARD_BG,
                 padding: "20px 26px",
               }}
             >
