@@ -263,24 +263,19 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
       transition={{ duration: 0.25 }}
     >
       <style>{`
-        /* The panel grid + literature band together fill exactly one
-           viewport (flex column, grid grows to take whatever the band
-           doesn't need) so the section reads as its own full "page"
-           instead of a partial block hanging at the top of the screen. */
-        .stage-section { display: flex; flex-direction: column; min-height: 100vh; }
-        .hero-grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
-        /* The floating "Take our survey" button is position:fixed, so no
-           amount of scrolling moves it off the literature band beneath it —
-           the only way to keep the band's text from being covered is to
-           give the band itself enough bottom padding that it ends above
-           where the fixed button sits. It covers relatively more of the
-           band on a narrow screen, so it needs more clearance there. */
-        .literature-cta { padding-bottom: 26px; }
+        /* The panel grid is its own full-viewport "page" for the wheel/touch
+           snap navigation above. The literature block below it is
+           deliberately NOT part of this — it used to be wedged into the
+           same flex container, forced to exactly fill whatever vertical
+           space the grid didn't use, which only worked when the math came
+           out exactly right for a given viewport. Keeping it as a normal,
+           separately-sized block in ordinary page flow (no flex-fill, no
+           100vh math) is far more robust across viewport sizes and zoom
+           levels. */
+        .hero-grid { min-height: 100vh; display: grid; grid-template-columns: repeat(3, 1fr); }
         @media (max-width: 820px) {
-          .stage-section { min-height: 0; }
-          .hero-grid { grid-template-columns: 1fr; flex: none; }
+          .hero-grid { grid-template-columns: 1fr; min-height: 0; }
           .hero-grid > * { height: 46vh; min-height: 320px; }
-          .literature-cta { padding-bottom: 92px; }
         }
       `}</style>
 
@@ -300,26 +295,31 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
             <HeroPanel key={p.id} phase={p} onSelect={onSelectPhase} />
           ))}
         </motion.div>
+      </div>
 
+      {/* A plain, self-contained block below the full-screen panel grid —
+          not full-bleed, not viewport-height-dependent, just a card in
+          normal document flow. */}
+      <div style={{ padding: "32px 24px 56px", background: "#fff" }}>
         <motion.button
           onClick={onLiterature}
-          className="literature-cta"
           whileHover={{ filter: "brightness(1.08)" }}
           whileTap={{ scale: 0.995 }}
           style={{
             display: "block",
             width: "100%",
+            maxWidth: 920,
+            margin: "0 auto",
             border: "none",
-            paddingTop: 26,
-            paddingLeft: 24,
-            paddingRight: 24,
+            borderRadius: 16,
+            padding: "22px 26px",
             background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})`,
             cursor: "pointer",
             textAlign: "left",
-            flexShrink: 0,
+            boxShadow: "0 8px 24px rgba(87,6,140,0.22)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 14, maxWidth: 920, margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <div
               style={{
                 width: 40,
