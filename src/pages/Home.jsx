@@ -6,7 +6,7 @@ import { CITATIONS } from "../data/citations";
 import { SITE, RESEARCH_CREDIT } from "../siteConfig";
 import LandingHero from "../components/LandingHero";
 import WhySurgerySection from "../components/WhySurgerySection";
-import { ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
+import { ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF, hexToRgba } from "../theme";
 
 const HERO_IMAGES = SITE.heroImages;
 
@@ -330,7 +330,7 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
             background: `linear-gradient(90deg, ${VIOLET}, ${ULTRA_VIOLET})`,
             cursor: "pointer",
             textAlign: "left",
-            boxShadow: "0 8px 24px rgba(87,6,140,0.22)",
+            boxShadow: `0 8px 24px ${hexToRgba(VIOLET, 0.22)}`,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

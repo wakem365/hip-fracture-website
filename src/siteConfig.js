@@ -36,6 +36,17 @@ export const SITE = {
     intra: introOpImg,
     post: postOpImg,
   },
+
+  // Brand colors, sampled from the hospital's logo — this is what theme.js
+  // reads instead of hardcoding a specific hospital's palette, so every
+  // component (which imports color tokens from theme.js, not from here
+  // directly) automatically re-themes with no further edits.
+  brand: {
+    primary: "#0061AA", // sampled from the wordmark in the Jamaica Hospital logo
+    primaryBright: "#0090D9", // lighter accent for gradients/highlights
+    ink: "#0A1E30", // near-black navy, used for body headings and dark overlays
+    tint: "#E3EEF7", // soft light-blue background wash
+  },
 };
 
 // The clinical evidence and pathway content in this app is drawn from real

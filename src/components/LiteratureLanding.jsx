@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Landmark, Microscope } from "lucide-react";
+import { SITE, RESEARCH_CREDIT } from "../siteConfig";
 import { GREY, INK, TINT, ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
 const item = {
@@ -12,9 +13,9 @@ export default function LiteratureLanding({ historicYears, currentYears, onSelec
     {
       id: "historic",
       icon: Landmark,
-      label: "Historic NYU Literature",
+      label: "Historic Research",
       blurb: historicYears ? `${historicYears[0]}–${historicYears[1]}` : "Pre-2002",
-      desc: "Earlier NYU Hospital for Joint Diseases publications that laid the groundwork for today's hip fracture protocols.",
+      desc: `Earlier publications that laid the groundwork for today's hip fracture protocols, reflecting the long-running clinical and research ties between ${SITE.hospitalShortName} and ${RESEARCH_CREDIT} physicians.`,
       count: historicYears ? historicYears[2] : 0,
     },
     {
@@ -30,12 +31,13 @@ export default function LiteratureLanding({ historicYears, currentYears, onSelec
   return (
     <div>
       <div style={{ fontFamily: FONT_MONO, fontSize: 12, letterSpacing: "0.14em", color: VIOLET, textTransform: "uppercase", marginBottom: 10, fontWeight: 600 }}>
-        NYU Hospital for Joint Diseases · NYU Langone Orthopedic Center
+        {SITE.hospitalShortName} · {RESEARCH_CREDIT} Orthopedics
       </div>
       <h1 style={{ fontFamily: FONT_SERIF, fontSize: 30, fontWeight: 600, margin: "0 0 10px 0", color: INK }}>The Literature, Over Time</h1>
       <p style={{ fontSize: 14, color: GREY, lineHeight: 1.55, marginBottom: 36, maxWidth: 620 }}>
-        Two collections: the current, cited evidence base behind this pathway, and older NYU publications kept here for
-        historical context. Pick one to browse by year.
+        Two collections: the current, cited evidence base behind this pathway, and older publications kept here for
+        historical context — work that reflects how {SITE.hospitalShortName} and {RESEARCH_CREDIT} physicians have
+        worked together over the years on hip fracture care. Pick one to browse by year.
       </p>
 
       <motion.div

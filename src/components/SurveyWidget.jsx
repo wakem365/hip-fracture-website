@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircleQuestion, X } from "lucide-react";
-import { GREY, INK, TINT, ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
+import { GREY, INK, TINT, ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF, hexToRgba } from "../theme";
 
 // ---------------------------------------------------------------------------
 // Local-only demo. Responses are saved to localStorage under STORAGE_KEY —
@@ -131,7 +131,7 @@ export default function SurveyWidget({ enabled }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 1 }}
-        whileHover={{ y: -2, boxShadow: "0 10px 26px rgba(87,6,140,0.35)" }}
+        whileHover={{ y: -2, boxShadow: `0 10px 26px ${hexToRgba(VIOLET, 0.35)}` }}
         whileTap={{ scale: 0.97 }}
         style={{
           position: "fixed",
@@ -149,7 +149,7 @@ export default function SurveyWidget({ enabled }) {
           fontSize: 13.5,
           fontWeight: 600,
           cursor: "pointer",
-          boxShadow: "0 6px 18px rgba(87,6,140,0.28)",
+          boxShadow: `0 6px 18px ${hexToRgba(VIOLET, 0.28)}`,
         }}
       >
         <MessageCircleQuestion size={17} />

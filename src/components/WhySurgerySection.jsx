@@ -4,11 +4,12 @@ import { ChevronDown } from "lucide-react";
 import EvidenceDropdown from "./EvidenceDropdown";
 import ambulationImg from "../assets/why-surgery/ambulation.jpg";
 import { RESEARCH_CREDIT } from "../siteConfig";
-import { INK, GREY, TINT, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
+import { INK, GREY, TINT, VIOLET, FONT_MONO, FONT_SERIF, hexToRgba } from "../theme";
 
 // Card background at 80% opacity (per request) so the background photo
-// reads faintly through the cards too, not just around them.
-const CARD_BG = "rgba(87, 6, 140, 0.8)";
+// reads faintly through the cards too, not just around them. Derived from
+// the theme's brand color (not hardcoded) so it re-themes per deployment.
+const CARD_BG = hexToRgba(VIOLET, 0.8);
 
 const POINTS = [
   {

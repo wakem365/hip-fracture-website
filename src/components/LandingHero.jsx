@@ -103,13 +103,13 @@ export default function LandingHero() {
           style={{
             background: "#fff",
             borderRadius: 14,
-            padding: SITE.logoImg ? "12px 16px" : "14px 22px",
+            padding: SITE.logoImg ? "10px 16px" : "14px 22px",
             boxShadow: "0 8px 28px rgba(0,0,0,0.35)",
             marginBottom: 30,
           }}
         >
           {SITE.logoImg ? (
-            <img src={SITE.logoImg} alt={SITE.logoAlt} style={{ display: "block", height: 68, width: "auto" }} />
+            <img src={SITE.logoImg} alt={SITE.logoAlt} style={{ display: "block", height: 82, width: "auto" }} />
           ) : (
             // No logo file supplied yet — a plain wordmark instead of a
             // placeholder image.

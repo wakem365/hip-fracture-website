@@ -8,7 +8,7 @@ import YearTimeline from "../components/YearTimeline";
 import { VIOLET, FONT_SERIF } from "../theme";
 
 const COLLECTIONS = {
-  historic: { citations: HISTORIC_CITATIONS, label: "Historic NYU Literature" },
+  historic: { citations: HISTORIC_CITATIONS, label: "Historic Research" },
   current: { citations: CITATIONS, label: "Current Guidance & Research" },
 };
 
