@@ -1,0 +1,56 @@
+// ---------------------------------------------------------------------------
+// SITE CONFIG
+//
+// This is the one file a new hospital deployment needs to edit to "plug in"
+// their own identity — name, logo, and photos. Every page/component reads
+// branding from here instead of hardcoding a hospital's name or images, so
+// the rest of the app (layout, pathway content, citations) is reusable
+// as-is across deployments.
+//
+// Fields left `null` fall back to a generic placeholder in the component
+// that uses them (a text wordmark instead of a logo image, a plain gradient
+// instead of a building photo, etc.) rather than silently showing another
+// hospital's branding — swap in the real asset when it's available.
+// ---------------------------------------------------------------------------
+import introOpImg from "./assets/hero/intra-op.png";
+import postOpImg from "./assets/hero/post-op.webp";
+
+export const SITE = {
+  // Full legal/display name, used in page titles and formal contexts.
+  hospitalName: "Jamaica Hospital Medical Center",
+  // Shorter form used inline in running text (hero tagline, etc.).
+  hospitalShortName: "Jamaica Hospital",
+
+  // import a logo file and set this, e.g.:
+  //   import logoImg from "./assets/brand/jamaica-hospital-logo.png";
+  //   logoImg,
+  logoImg: null,
+  logoAlt: "Jamaica Hospital Medical Center",
+
+  // Full-bleed photo behind the landing hero (e.g. the hospital's building,
+  // signage, or an EMS/arrival scene). Falls back to a plain gradient when
+  // not set — see LandingHero.jsx.
+  heroBuildingImg: null,
+
+  // One photo per pathway phase, shown on the three home-page panels.
+  // `pre` (arrival / EMS) has no sensible hospital-neutral default — it
+  // previously showed an NYU Langone-branded ambulance, which isn't
+  // something another hospital's deployment should ship with, so it's left
+  // null until a real photo is supplied (falls back to a plain icon panel).
+  // `intra` and `post` are generic stock photos with no hospital branding
+  // visible, so they're fine as shared defaults until replaced.
+  heroImages: {
+    pre: null,
+    intra: introOpImg,
+    post: postOpImg,
+  },
+};
+
+// The clinical evidence and pathway content in this app is drawn from real
+// published research, most of it conducted by NYU Langone physicians and
+// researchers — that's true regardless of which hospital is deploying the
+// site, so this credits the actual source of the research rather than
+// claiming it as "this hospital's own data." Leave this as-is when setting
+// up a new deployment; it isn't part of the per-hospital branding above.
+export const RESEARCH_CREDIT = "NYU Langone";
+export const RESEARCH_CREDIT_FULL = "NYU Langone physicians and researchers";

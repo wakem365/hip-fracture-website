@@ -1,4 +1,5 @@
 import { Activity, Scissors, HeartPulse } from "lucide-react";
+import { RESEARCH_CREDIT } from "../siteConfig";
 
 export const PHASES = [
   { id: "pre", label: "Before Surgery", icon: Activity, blurb: "From arrival to the operating room", desc: "What happens before your surgery — the exams, the tests, and the plan for your care." },
@@ -108,7 +109,7 @@ export const STEPS = {
         {
           title: "MAC-STILA",
           what: "Light sedation plus numbing medicine injected directly into the surgery site by the surgeon — no spinal or general anesthesia needed at all.",
-          why: "This approach was developed by NYU physicians and studied at NYU for patients who are too frail for spinal positioning or general anesthesia. It's linked to less confusion after surgery.",
+          why: `This approach was developed and studied by ${RESEARCH_CREDIT} for patients who are too frail for spinal positioning or general anesthesia. It's linked to less confusion after surgery.`,
           citations: ["macstila_technique", "macstila_guide", "macstila_outcomes"],
         },
         {
@@ -161,7 +162,7 @@ export const STEPS = {
         {
           title: "Total Hip Replacement (THA)",
           what: "Both the ball and the socket of your hip are replaced with an implant — not just the ball, like in a partial hip replacement. This is used selectively, mainly in patients who were more active before the fracture, or who already had arthritis in that hip.",
-          why: "NYU's research found that having a clear, standard way to decide between a partial and a total hip replacement improved patient outcomes and shortened hospital stays. One important thing to know: a hip replacement done after a fracture is not the same operation as a hip replacement done for arthritis on a planned schedule. This surgery happens urgently, on a bone that just broke rather than one that gradually wore down, often in patients who are more medically frail — and it comes with different precautions than a planned arthritis replacement.",
+          why: `Research by ${RESEARCH_CREDIT} found that having a clear, standard way to decide between a partial and a total hip replacement improved patient outcomes and shortened hospital stays. One important thing to know: a hip replacement done after a fracture is not the same operation as a hip replacement done for arthritis on a planned schedule. This surgery happens urgently, on a bone that just broke rather than one that gradually wore down, often in patients who are more medically frail — and it comes with different precautions than a planned arthritis replacement.`,
           citations: [
             "charnley_award",
             "health_trial",
@@ -180,7 +181,7 @@ export const STEPS = {
     {
       title: "Targeting Next Calendar Day Surgery",
       what: "Your care team tracks the time from when you arrive to when your surgery starts, with the goal of operating by the next calendar day, once you're medically ready.",
-      why: "The goal here is the next calendar day — not a strict 24-hour clock. If you arrive the evening before, surgery the following morning or afternoon still meets this goal, even though more than 24 hours may have passed. Research — including NYU's own — supports this next-day target, and NYU's pathway work has shown that streamlining pre-surgery testing helps get patients to the operating room without unnecessary delay and without adding risk. Sometimes a short delay past the next day is the safer choice — for example, if you have a heart condition, another injury, or an illness that needs to be treated or stabilized first. In those cases, your team weighs that delay carefully, and the goal becomes getting you to surgery as soon as you're truly ready.",
+      why: `The goal here is the next calendar day — not a strict 24-hour clock. If you arrive the evening before, surgery the following morning or afternoon still meets this goal, even though more than 24 hours may have passed. Research — including work by ${RESEARCH_CREDIT} — supports this next-day target, and that research has shown that streamlining pre-surgery testing helps get patients to the operating room without unnecessary delay and without adding risk. Sometimes a short delay past the next day is the safer choice — for example, if you have a heart condition, another injury, or an illness that needs to be treated or stabilized first. In those cases, your team weighs that delay carefully, and the goal becomes getting you to surgery as soon as you're truly ready.`,
       citations: [
         "hip_attack",
         "echo_pathway",
@@ -228,7 +229,7 @@ export const STEPS = {
     {
       title: "Getting Up and Moving Early",
       what: "Physical therapy helps you stand or walk, often starting the day after surgery.",
-      why: "Moving early lowers your risk of blood clots, pneumonia, and muscle loss — staying still is often more dangerous than the surgery itself. NYU's own data found that patients who didn't walk on the first day after surgery had more complications and a higher risk of death.",
+      why: `Moving early lowers your risk of blood clots, pneumonia, and muscle loss — staying still is often more dangerous than the surgery itself. Research by ${RESEARCH_CREDIT} found that patients who didn't walk on the first day after surgery had more complications and a higher risk of death.`,
       citations: ["ambulation_pod1", "egol1997", "konda2021", "esper2024"],
     },
     {
@@ -255,7 +256,7 @@ export const STEPS = {
         {
           title: "Confusion (Delirium)",
           what: "A sudden state of confusion or disorientation that's common in older adults after hip fracture surgery — brought on by the stress of surgery and anesthesia, pain, poor sleep, and certain medicines, especially opioids and other sedating drugs.",
-          why: "Your care team limits sedating medicines where possible, controls pain without relying too heavily on opioids, and helps keep you oriented with clocks, family visits, and a quieter night. The type of anesthesia matters too — NYU's own data found that MAC-STILA was linked to less confusion after surgery than general anesthesia.",
+          why: `Your care team limits sedating medicines where possible, controls pain without relying too heavily on opioids, and helps keep you oriented with clocks, family visits, and a quieter night. The type of anesthesia matters too — research by ${RESEARCH_CREDIT} found that MAC-STILA was linked to less confusion after surgery than general anesthesia.`,
           citations: ["macstila_outcomes", "aaos_cpg_2021"],
         },
         {
@@ -272,7 +273,7 @@ export const STEPS = {
         {
           title: "Home (No Services)",
           what: "You go straight home without extra home-care services, usually using a walker or cane, with follow-up appointments scheduled afterward.",
-          why: "This is one possible path after surgery, for patients where it's safely achievable. NYU's own data — and a hospital-wide \"Home Is Best\" program built from it — show that patients who go straight home have fewer complications, like urinary infections, kidney problems, and blood clots, than patients discharged elsewhere.",
+          why: `This is one possible path after surgery, for patients where it's safely achievable. Research by ${RESEARCH_CREDIT} — including a hospital-wide program there called "Home Is Best" built from it — shows that patients who go straight home have fewer complications, like urinary infections, kidney problems, and blood clots, than patients discharged elsewhere.`,
           citations: [
             "discharge_sttgma",
             "home_discharge_program",
@@ -285,13 +286,13 @@ export const STEPS = {
         {
           title: "Home with Services",
           what: "You go home, but a visiting nurse and/or physical therapist comes to you.",
-          why: "This option is for patients who could benefit from some extra support during recovery — it isn't about what family is or isn't able to do. NYU's research found that home health services led to better outcomes for the cost than a stay at a skilled nursing facility, for patients who could safely choose either one.",
+          why: `This option is for patients who could benefit from some extra support during recovery — it isn't about what family is or isn't able to do. Research by ${RESEARCH_CREDIT} found that home health services led to better outcomes for the cost than a stay at a skilled nursing facility, for patients who could safely choose either one.`,
           citations: ["snf_value"],
         },
         {
           title: "Rehab Facility",
           what: "A short stay at a subacute rehab unit or skilled nursing facility (SNF) for more intensive physical therapy before you go home — this is the most common type of \"rehab facility\" after a hip fracture, distinct from an inpatient rehab hospital.",
-          why: "This is reserved for patients who need more recovery time than home-based care can offer. The goal is still to get you home as soon as it's safe — NYU's research found that, when either option was medically appropriate, a stay at a skilled nursing facility provided less value than getting home health services instead.",
+          why: `This is reserved for patients who need more recovery time than home-based care can offer. The goal is still to get you home as soon as it's safe — research by ${RESEARCH_CREDIT} found that, when either option was medically appropriate, a stay at a skilled nursing facility provided less value than getting home health services instead.`,
           citations: ["snf_value"],
         },
         {

@@ -3,18 +3,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { PHASES } from "../data/steps";
 import { CITATIONS } from "../data/citations";
-import preOpImg from "../assets/hero/pre-op.jpg";
-import intraOpImg from "../assets/hero/intra-op.png";
-import postOpImg from "../assets/hero/post-op.webp";
+import { SITE, RESEARCH_CREDIT } from "../siteConfig";
 import LandingHero from "../components/LandingHero";
 import WhySurgerySection from "../components/WhySurgerySection";
 import { ULTRA_VIOLET, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
-const HERO_IMAGES = {
-  pre: preOpImg,
-  intra: intraOpImg,
-  post: postOpImg,
-};
+const HERO_IMAGES = SITE.heroImages;
 
 // Each panel's image/overlay/caption reads its "rest" vs "hover" look from
 // this shared variant map, driven by the parent button's whileHover — no
@@ -34,6 +28,7 @@ const cueVariants = {
 
 function HeroPanel({ phase, onSelect }) {
   const Icon = phase.icon;
+  const img = HERO_IMAGES[phase.id];
   return (
     <motion.button
       onClick={() => onSelect(phase.id)}
@@ -55,13 +50,32 @@ function HeroPanel({ phase, onSelect }) {
         textAlign: "left",
       }}
     >
-      <motion.img
-        src={HERO_IMAGES[phase.id]}
-        alt=""
-        variants={imgVariants}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-      />
+      {img ? (
+        <motion.img
+          src={img}
+          alt=""
+          variants={imgVariants}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+      ) : (
+        // No photo supplied yet for this phase — a plain icon panel
+        // instead of a broken image or another hospital's photo.
+        <motion.div
+          variants={imgVariants}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(160deg, #1a1420 0%, ${VIOLET} 100%)`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon size={56} color="rgba(255,255,255,0.25)" />
+        </motion.div>
+      )}
       <motion.div
         variants={overlayVariants}
         transition={{ duration: 0.35, ease: "easeOut" }}
@@ -338,7 +352,7 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 15.5, fontWeight: 600, color: "#fff", fontFamily: FONT_SERIF }}>The Literature, Over Time</div>
               <div style={{ fontSize: 12.5, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>
-                {Object.keys(CITATIONS).length} citations, 2002–2026 — how NYU's hip fracture research has evolved.
+                {Object.keys(CITATIONS).length} citations, 2002–2026 — how {RESEARCH_CREDIT} hip fracture research has evolved.
               </div>
             </div>
             <ArrowRight size={18} color="#fff" />

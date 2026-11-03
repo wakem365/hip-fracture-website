@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import EvidenceDropdown from "./EvidenceDropdown";
 import ambulationImg from "../assets/why-surgery/ambulation.jpg";
+import { RESEARCH_CREDIT } from "../siteConfig";
 import { INK, GREY, TINT, VIOLET, FONT_MONO, FONT_SERIF } from "../theme";
 
 // Card background at 80% opacity (per request) so the background photo
@@ -20,7 +21,7 @@ const POINTS = [
   },
   {
     title: "Left Untreated, It Can Be Life-Threatening",
-    body: "Even with today's medical care, a hip fracture is a serious, sometimes life-threatening injury. NYU's own research on a large group of patients shows that waiting too long for surgery — or skipping it altogether — raises that risk even further. Getting patients safely and quickly to surgery is the single biggest thing the care team can do to protect you.",
+    body: `Even with today's medical care, a hip fracture is a serious, sometimes life-threatening injury. Research by ${RESEARCH_CREDIT} on a large group of patients shows that waiting too long for surgery — or skipping it altogether — raises that risk even further. Getting patients safely and quickly to surgery is the single biggest thing the care team can do to protect you.`,
   },
 ];
 

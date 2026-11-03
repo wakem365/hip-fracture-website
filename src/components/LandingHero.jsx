@@ -1,9 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import buildingImg from "../assets/landing/nyu-loh-banners.webp";
-import logoImg from "../assets/brand/nyu-langone-orthopedics-logo.png";
-import { FONT_MONO, FONT_SERIF } from "../theme";
+import { SITE } from "../siteConfig";
+import { VIOLET, ULTRA_VIOLET, INK, FONT_MONO, FONT_SERIF } from "../theme";
 
 const wordVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -46,19 +45,33 @@ export default function LandingHero() {
 
   return (
     <div ref={sectionRef} className="landing-hero-section" style={{ position: "relative", height: "100vh", overflow: "hidden", background: "#000" }}>
-      <motion.img
-        src={buildingImg}
-        alt=""
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "center 20%",
-          scale: imageScale,
-        }}
-      />
+      {SITE.heroBuildingImg ? (
+        <motion.img
+          src={SITE.heroBuildingImg}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 20%",
+            scale: imageScale,
+          }}
+        />
+      ) : (
+        // No hospital-supplied photo yet — a plain brand-toned gradient
+        // instead of leaving the hero blank (or showing another hospital's
+        // building).
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(160deg, ${INK} 0%, ${VIOLET} 55%, ${ULTRA_VIOLET} 100%)`,
+            scale: imageScale,
+          }}
+        />
+      )}
       <motion.div
         style={{
           position: "absolute",
@@ -90,12 +103,20 @@ export default function LandingHero() {
           style={{
             background: "#fff",
             borderRadius: 14,
-            padding: "12px 16px",
+            padding: SITE.logoImg ? "12px 16px" : "14px 22px",
             boxShadow: "0 8px 28px rgba(0,0,0,0.35)",
             marginBottom: 30,
           }}
         >
-          <img src={logoImg} alt="NYU Langone Orthopedics" style={{ display: "block", height: 68, width: "auto" }} />
+          {SITE.logoImg ? (
+            <img src={SITE.logoImg} alt={SITE.logoAlt} style={{ display: "block", height: 68, width: "auto" }} />
+          ) : (
+            // No logo file supplied yet — a plain wordmark instead of a
+            // placeholder image.
+            <div style={{ fontFamily: FONT_SERIF, fontWeight: 600, fontSize: 22, color: VIOLET, letterSpacing: "-0.01em" }}>
+              {SITE.hospitalShortName}
+            </div>
+          )}
         </motion.div>
 
         <motion.div
@@ -112,7 +133,7 @@ export default function LandingHero() {
             fontWeight: 600,
           }}
         >
-          NYU Orthopedic Trauma · Patient Care Pathway
+          {SITE.hospitalShortName} Orthopedic Trauma · Patient Care Pathway
         </motion.div>
 
         <StaggeredTitle
