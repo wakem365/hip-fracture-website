@@ -12,6 +12,9 @@
 // instead of a building photo, etc.) rather than silently showing another
 // hospital's branding — swap in the real asset when it's available.
 // ---------------------------------------------------------------------------
+import logoImg from "./assets/brand/jamaica-hospital-logo.png";
+import heroBuildingImg from "./assets/landing/jamaica-hospital-building.webp";
+import preOpImg from "./assets/hero/pre-op-ambulance.webp";
 import introOpImg from "./assets/hero/intra-op.png";
 import postOpImg from "./assets/hero/post-op.webp";
 
@@ -21,26 +24,15 @@ export const SITE = {
   // Shorter form used inline in running text (hero tagline, etc.).
   hospitalShortName: "Jamaica Hospital",
 
-  // import a logo file and set this, e.g.:
-  //   import logoImg from "./assets/brand/jamaica-hospital-logo.png";
-  //   logoImg,
-  logoImg: null,
+  logoImg,
   logoAlt: "Jamaica Hospital Medical Center",
 
-  // Full-bleed photo behind the landing hero (e.g. the hospital's building,
-  // signage, or an EMS/arrival scene). Falls back to a plain gradient when
-  // not set — see LandingHero.jsx.
-  heroBuildingImg: null,
+  // Full-bleed photo behind the landing hero.
+  heroBuildingImg,
 
   // One photo per pathway phase, shown on the three home-page panels.
-  // `pre` (arrival / EMS) has no sensible hospital-neutral default — it
-  // previously showed an NYU Langone-branded ambulance, which isn't
-  // something another hospital's deployment should ship with, so it's left
-  // null until a real photo is supplied (falls back to a plain icon panel).
-  // `intra` and `post` are generic stock photos with no hospital branding
-  // visible, so they're fine as shared defaults until replaced.
   heroImages: {
-    pre: null,
+    pre: preOpImg,
     intra: introOpImg,
     post: postOpImg,
   },
