@@ -277,6 +277,7 @@ export const STEPS = {
           citations: [
             "discharge_sttgma",
             "home_discharge_program",
+            "home_safest_discharge",
             "pettit2025_2",
             "esper2025",
             "merrell2025",

@@ -95,6 +95,16 @@ export const CITATIONS = {
     type: "nyu",
     note: "Shows STTGMA can predict discharge location early, letting discharge planning start on day one instead of at the end of the stay.",
   },
+  home_safest_discharge: {
+    year: 2023,
+    authors: "Deemer AR, Ganta A, Leucht P, Konda S, Tejwani NC, Egol KA",
+    title: "Home discharge location is safest following fracture of the hip.",
+    journal: "European Journal of Orthopaedic Surgery & Traumatology, 33(8):3539-3546",
+    doi: "10.1007/s00590-023-03551-9",
+    pmid: "37219687",
+    type: "nyu",
+    note: "Found that discharge directly home carried the lowest risk of complications among hip fracture patients, compared with discharge to a facility — direct evidence behind favoring home discharge when it's safely achievable.",
+  },
   admitting_service_cost: {
     year: 2018,
     authors: "Lott A, Haglin J, Belayneh R, Konda SR, Egol KA",

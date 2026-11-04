@@ -352,7 +352,7 @@ export default function Home({ onSelectPhase, onLiterature, skipHero = false }) 
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 15.5, fontWeight: 600, color: "#fff", fontFamily: FONT_SERIF }}>The Literature, Over Time</div>
               <div style={{ fontSize: 12.5, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>
-                {Object.keys(CITATIONS).length} citations, 2002–2026 — how {RESEARCH_CREDIT} hip fracture research has evolved.
+                {Object.keys(CITATIONS).length} citations, 2002–2026 — how {SITE.hospitalShortName} - {RESEARCH_CREDIT} Orthopedic hip fracture research has evolved.
               </div>
             </div>
             <ArrowRight size={18} color="#fff" />
